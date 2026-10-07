@@ -1,0 +1,809 @@
+{
+  "meta": {
+    "gerado_em": "2026-10-07T00:00:00+00:00",
+    "amostra": true,
+    "municipio": {
+      "codigo_ibge": "0000000",
+      "nome": "Município Exemplo",
+      "uf": "PR",
+      "uf_nome": "Paraná",
+      "regiao": "Sul",
+      "microrregiao": "Exemplo",
+      "mesorregiao": "Exemplo"
+    },
+    "etapas": []
+  },
+  "populacao": {
+    "serie": [
+      {
+        "ano": 2012,
+        "valor": 78872.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": null
+      },
+      {
+        "ano": 2013,
+        "valor": 79440.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": 0.72
+      },
+      {
+        "ano": 2014,
+        "valor": 80330.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": 1.12
+      },
+      {
+        "ano": 2015,
+        "valor": 80859.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": 0.659
+      },
+      {
+        "ano": 2016,
+        "valor": 81691.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": 1.029
+      },
+      {
+        "ano": 2017,
+        "valor": 82420.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": 0.892
+      },
+      {
+        "ano": 2018,
+        "valor": 82953.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": 0.647
+      },
+      {
+        "ano": 2019,
+        "valor": 83787.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": 1.005
+      },
+      {
+        "ano": 2020,
+        "valor": 84315.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": 0.63
+      },
+      {
+        "ano": 2021,
+        "valor": 85113.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": 0.946
+      },
+      {
+        "ano": 2022,
+        "valor": 85671.0,
+        "fonte": "Censo IBGE",
+        "variacao_pct": 0.656
+      },
+      {
+        "ano": 2024,
+        "valor": 86247.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": 0.672
+      },
+      {
+        "ano": 2025,
+        "valor": 87057.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": 0.939
+      }
+    ],
+    "fonte": "DADOS FICTÍCIOS - substitua executando etl/coletar_dados.py"
+  },
+  "pib": {
+    "serie": [
+      {
+        "ano": 2012,
+        "pib": 2301911157,
+        "vab_total": 2071720041,
+        "vab_agropecuaria": 368305785,
+        "vab_industria": 552458678,
+        "vab_servicos": 874726240,
+        "vab_adm_publica": 276229339,
+        "impostos": 230191116,
+        "pib_per_capita": 29185.4
+      },
+      {
+        "ano": 2013,
+        "pib": 2393766981,
+        "vab_total": 2154390283,
+        "vab_agropecuaria": 383002717,
+        "vab_industria": 574504075,
+        "vab_servicos": 909631453,
+        "vab_adm_publica": 287252038,
+        "impostos": 239376698,
+        "pib_per_capita": 30133.02
+      },
+      {
+        "ano": 2014,
+        "pib": 2508330555,
+        "vab_total": 2257497500,
+        "vab_agropecuaria": 401332889,
+        "vab_industria": 601999333,
+        "vab_servicos": 953165611,
+        "vab_adm_publica": 300999667,
+        "impostos": 250833056,
+        "pib_per_capita": 31225.33
+      },
+      {
+        "ano": 2015,
+        "pib": 2709485266,
+        "vab_total": 2438536739,
+        "vab_agropecuaria": 433517643,
+        "vab_industria": 650276464,
+        "vab_servicos": 1029604401,
+        "vab_adm_publica": 325138232,
+        "impostos": 270948527,
+        "pib_per_capita": 33508.77
+      },
+      {
+        "ano": 2016,
+        "pib": 2996194097,
+        "vab_total": 2696574687,
+        "vab_agropecuaria": 479391056,
+        "vab_industria": 719086583,
+        "vab_servicos": 1138553757,
+        "vab_adm_publica": 359543292,
+        "impostos": 299619410,
+        "pib_per_capita": 36677.16
+      },
+      {
+        "ano": 2017,
+        "pib": 3224408916,
+        "vab_total": 2901968024,
+        "vab_agropecuaria": 515905427,
+        "vab_industria": 773858140,
+        "vab_servicos": 1225275388,
+        "vab_adm_publica": 386929070,
+        "impostos": 322440892,
+        "pib_per_capita": 39121.68
+      },
+      {
+        "ano": 2018,
+        "pib": 3423465988,
+        "vab_total": 3081119389,
+        "vab_agropecuaria": 547754558,
+        "vab_industria": 821631837,
+        "vab_servicos": 1300917075,
+        "vab_adm_publica": 410815919,
+        "impostos": 342346599,
+        "pib_per_capita": 41269.95
+      },
+      {
+        "ano": 2019,
+        "pib": 3793544060,
+        "vab_total": 3414189654,
+        "vab_agropecuaria": 606967050,
+        "vab_industria": 910450574,
+        "vab_servicos": 1441546743,
+        "vab_adm_publica": 455225287,
+        "impostos": 379354406,
+        "pib_per_capita": 45276.05
+      },
+      {
+        "ano": 2020,
+        "pib": 3921487458,
+        "vab_total": 3529338712,
+        "vab_agropecuaria": 627437993,
+        "vab_industria": 941156990,
+        "vab_servicos": 1490165234,
+        "vab_adm_publica": 470578495,
+        "impostos": 392148746,
+        "pib_per_capita": 46509.96
+      },
+      {
+        "ano": 2021,
+        "pib": 4308449945,
+        "vab_total": 3877604950,
+        "vab_agropecuaria": 689351991,
+        "vab_industria": 1034027987,
+        "vab_servicos": 1637210979,
+        "vab_adm_publica": 517013993,
+        "impostos": 430844994,
+        "pib_per_capita": 50620.35
+      }
+    ],
+    "unidade": "R$ correntes",
+    "fonte": "DADOS FICTÍCIOS"
+  },
+  "rais": {
+    "serie": [
+      {
+        "ano": 2014,
+        "empregos": 21353,
+        "remuneracao_media": 2178.15
+      },
+      {
+        "ano": 2015,
+        "empregos": 20914,
+        "remuneracao_media": 2277.09
+      },
+      {
+        "ano": 2016,
+        "empregos": 21652,
+        "remuneracao_media": 2365.98
+      },
+      {
+        "ano": 2017,
+        "empregos": 22010,
+        "remuneracao_media": 2512.54
+      },
+      {
+        "ano": 2018,
+        "empregos": 22005,
+        "remuneracao_media": 2656.73
+      },
+      {
+        "ano": 2019,
+        "empregos": 21455,
+        "remuneracao_media": 2744.34
+      },
+      {
+        "ano": 2020,
+        "empregos": 21165,
+        "remuneracao_media": 2920.04
+      },
+      {
+        "ano": 2021,
+        "empregos": 21254,
+        "remuneracao_media": 3053.5
+      },
+      {
+        "ano": 2022,
+        "empregos": 21612,
+        "remuneracao_media": 3214.3
+      },
+      {
+        "ano": 2023,
+        "empregos": 21482,
+        "remuneracao_media": 3438.4
+      },
+      {
+        "ano": 2024,
+        "empregos": 22039,
+        "remuneracao_media": 3583.51
+      }
+    ],
+    "por_setor": {
+      "ano": 2024,
+      "itens": [
+        {
+          "setor": "Serviços",
+          "empregos": 7493,
+          "remuneracao_media": 3150.0
+        },
+        {
+          "setor": "Comércio",
+          "empregos": 5289,
+          "remuneracao_media": 2480.0
+        },
+        {
+          "setor": "Indústria",
+          "empregos": 4628,
+          "remuneracao_media": 3420.0
+        },
+        {
+          "setor": "Administração pública",
+          "empregos": 2424,
+          "remuneracao_media": 4890.0
+        },
+        {
+          "setor": "Agropecuária",
+          "empregos": 1322,
+          "remuneracao_media": 2760.0
+        },
+        {
+          "setor": "Construção",
+          "empregos": 882,
+          "remuneracao_media": 2950.0
+        }
+      ]
+    },
+    "fonte": "DADOS FICTÍCIOS"
+  },
+  "caged": {
+    "serie": [
+      {
+        "ano": 2023,
+        "mes": 1,
+        "admissoes": 1114,
+        "desligamentos": 1050,
+        "saldo": 64
+      },
+      {
+        "ano": 2023,
+        "mes": 2,
+        "admissoes": 1088,
+        "desligamentos": 1074,
+        "saldo": 14
+      },
+      {
+        "ano": 2023,
+        "mes": 3,
+        "admissoes": 995,
+        "desligamentos": 1041,
+        "saldo": -46
+      },
+      {
+        "ano": 2023,
+        "mes": 4,
+        "admissoes": 1049,
+        "desligamentos": 982,
+        "saldo": 67
+      },
+      {
+        "ano": 2023,
+        "mes": 5,
+        "admissoes": 1131,
+        "desligamentos": 1241,
+        "saldo": -110
+      },
+      {
+        "ano": 2023,
+        "mes": 6,
+        "admissoes": 857,
+        "desligamentos": 747,
+        "saldo": 110
+      },
+      {
+        "ano": 2023,
+        "mes": 7,
+        "admissoes": 1082,
+        "desligamentos": 1049,
+        "saldo": 33
+      },
+      {
+        "ano": 2023,
+        "mes": 8,
+        "admissoes": 904,
+        "desligamentos": 957,
+        "saldo": -53
+      },
+      {
+        "ano": 2023,
+        "mes": 9,
+        "admissoes": 995,
+        "desligamentos": 893,
+        "saldo": 102
+      },
+      {
+        "ano": 2023,
+        "mes": 10,
+        "admissoes": 1070,
+        "desligamentos": 1037,
+        "saldo": 33
+      },
+      {
+        "ano": 2023,
+        "mes": 11,
+        "admissoes": 840,
+        "desligamentos": 946,
+        "saldo": -106
+      },
+      {
+        "ano": 2023,
+        "mes": 12,
+        "admissoes": 859,
+        "desligamentos": 974,
+        "saldo": -115
+      },
+      {
+        "ano": 2024,
+        "mes": 1,
+        "admissoes": 1105,
+        "desligamentos": 1111,
+        "saldo": -6
+      },
+      {
+        "ano": 2024,
+        "mes": 2,
+        "admissoes": 980,
+        "desligamentos": 927,
+        "saldo": 53
+      },
+      {
+        "ano": 2024,
+        "mes": 3,
+        "admissoes": 999,
+        "desligamentos": 1011,
+        "saldo": -12
+      },
+      {
+        "ano": 2024,
+        "mes": 4,
+        "admissoes": 1074,
+        "desligamentos": 1082,
+        "saldo": -8
+      },
+      {
+        "ano": 2024,
+        "mes": 5,
+        "admissoes": 1053,
+        "desligamentos": 930,
+        "saldo": 123
+      },
+      {
+        "ano": 2024,
+        "mes": 6,
+        "admissoes": 867,
+        "desligamentos": 968,
+        "saldo": -101
+      },
+      {
+        "ano": 2024,
+        "mes": 7,
+        "admissoes": 958,
+        "desligamentos": 939,
+        "saldo": 19
+      },
+      {
+        "ano": 2024,
+        "mes": 8,
+        "admissoes": 853,
+        "desligamentos": 728,
+        "saldo": 125
+      },
+      {
+        "ano": 2024,
+        "mes": 9,
+        "admissoes": 978,
+        "desligamentos": 1003,
+        "saldo": -25
+      },
+      {
+        "ano": 2024,
+        "mes": 10,
+        "admissoes": 1115,
+        "desligamentos": 1149,
+        "saldo": -34
+      },
+      {
+        "ano": 2024,
+        "mes": 11,
+        "admissoes": 1048,
+        "desligamentos": 980,
+        "saldo": 68
+      },
+      {
+        "ano": 2024,
+        "mes": 12,
+        "admissoes": 1017,
+        "desligamentos": 1164,
+        "saldo": -147
+      },
+      {
+        "ano": 2025,
+        "mes": 1,
+        "admissoes": 997,
+        "desligamentos": 862,
+        "saldo": 135
+      },
+      {
+        "ano": 2025,
+        "mes": 2,
+        "admissoes": 1056,
+        "desligamentos": 1006,
+        "saldo": 50
+      },
+      {
+        "ano": 2025,
+        "mes": 3,
+        "admissoes": 906,
+        "desligamentos": 922,
+        "saldo": -16
+      },
+      {
+        "ano": 2025,
+        "mes": 4,
+        "admissoes": 879,
+        "desligamentos": 865,
+        "saldo": 14
+      },
+      {
+        "ano": 2025,
+        "mes": 5,
+        "admissoes": 850,
+        "desligamentos": 765,
+        "saldo": 85
+      },
+      {
+        "ano": 2025,
+        "mes": 6,
+        "admissoes": 967,
+        "desligamentos": 860,
+        "saldo": 107
+      },
+      {
+        "ano": 2025,
+        "mes": 7,
+        "admissoes": 946,
+        "desligamentos": 907,
+        "saldo": 39
+      },
+      {
+        "ano": 2025,
+        "mes": 8,
+        "admissoes": 1020,
+        "desligamentos": 1114,
+        "saldo": -94
+      },
+      {
+        "ano": 2025,
+        "mes": 9,
+        "admissoes": 1074,
+        "desligamentos": 954,
+        "saldo": 120
+      },
+      {
+        "ano": 2025,
+        "mes": 10,
+        "admissoes": 905,
+        "desligamentos": 879,
+        "saldo": 26
+      },
+      {
+        "ano": 2025,
+        "mes": 11,
+        "admissoes": 1025,
+        "desligamentos": 1025,
+        "saldo": 0
+      },
+      {
+        "ano": 2025,
+        "mes": 12,
+        "admissoes": 962,
+        "desligamentos": 1108,
+        "saldo": -146
+      },
+      {
+        "ano": 2026,
+        "mes": 1,
+        "admissoes": 890,
+        "desligamentos": 959,
+        "saldo": -69
+      },
+      {
+        "ano": 2026,
+        "mes": 2,
+        "admissoes": 1040,
+        "desligamentos": 1121,
+        "saldo": -81
+      },
+      {
+        "ano": 2026,
+        "mes": 3,
+        "admissoes": 1101,
+        "desligamentos": 1032,
+        "saldo": 69
+      },
+      {
+        "ano": 2026,
+        "mes": 4,
+        "admissoes": 1032,
+        "desligamentos": 983,
+        "saldo": 49
+      },
+      {
+        "ano": 2026,
+        "mes": 5,
+        "admissoes": 1014,
+        "desligamentos": 1119,
+        "saldo": -105
+      },
+      {
+        "ano": 2026,
+        "mes": 6,
+        "admissoes": 938,
+        "desligamentos": 836,
+        "saldo": 102
+      },
+      {
+        "ano": 2026,
+        "mes": 7,
+        "admissoes": 862,
+        "desligamentos": 767,
+        "saldo": 95
+      },
+      {
+        "ano": 2026,
+        "mes": 8,
+        "admissoes": 897,
+        "desligamentos": 816,
+        "saldo": 81
+      }
+    ],
+    "fonte": "DADOS FICTÍCIOS"
+  },
+  "estabelecimentos": {
+    "serie": [
+      {
+        "ano": 2014,
+        "total": 3389
+      },
+      {
+        "ano": 2015,
+        "total": 3456
+      },
+      {
+        "ano": 2016,
+        "total": 3612
+      },
+      {
+        "ano": 2017,
+        "total": 3720
+      },
+      {
+        "ano": 2018,
+        "total": 3763
+      },
+      {
+        "ano": 2019,
+        "total": 3868
+      },
+      {
+        "ano": 2020,
+        "total": 3966
+      },
+      {
+        "ano": 2021,
+        "total": 4025
+      },
+      {
+        "ano": 2022,
+        "total": 4138
+      },
+      {
+        "ano": 2023,
+        "total": 4268
+      },
+      {
+        "ano": 2024,
+        "total": 4378
+      }
+    ],
+    "por_setor": {
+      "ano": 2024,
+      "itens": [
+        {
+          "setor": "Comércio",
+          "quantidade": 1180
+        },
+        {
+          "setor": "Outros serviços",
+          "quantidade": 410
+        },
+        {
+          "setor": "Alojamento e alimentação",
+          "quantidade": 365
+        },
+        {
+          "setor": "Indústria de transformação",
+          "quantidade": 340
+        },
+        {
+          "setor": "Atividades profissionais e técnicas",
+          "quantidade": 295
+        },
+        {
+          "setor": "Saúde e serviços sociais",
+          "quantidade": 240
+        },
+        {
+          "setor": "Transporte e armazenagem",
+          "quantidade": 225
+        },
+        {
+          "setor": "Construção",
+          "quantidade": 210
+        },
+        {
+          "setor": "Agropecuária",
+          "quantidade": 185
+        },
+        {
+          "setor": "Atividades administrativas",
+          "quantidade": 160
+        },
+        {
+          "setor": "Educação",
+          "quantidade": 120
+        },
+        {
+          "setor": "Informação e comunicação",
+          "quantidade": 85
+        }
+      ]
+    },
+    "fonte": "DADOS FICTÍCIOS"
+  },
+  "agropecuaria": {
+    "lavouras": {
+      "ano": 2024,
+      "itens": [
+        {
+          "produto": "Soja (em grão)",
+          "valor": 186000000.0,
+          "quantidade": 61200,
+          "unidade": "Toneladas",
+          "area_colhida_ha": 28400
+        },
+        {
+          "produto": "Milho (em grão)",
+          "valor": 74000000.0,
+          "quantidade": 98500,
+          "unidade": "Toneladas",
+          "area_colhida_ha": 9800
+        },
+        {
+          "produto": "Trigo (em grão)",
+          "valor": 21000000.0,
+          "quantidade": 15200,
+          "unidade": "Toneladas",
+          "area_colhida_ha": 5100
+        },
+        {
+          "produto": "Feijão (em grão)",
+          "valor": 9400000.0,
+          "quantidade": 3100,
+          "unidade": "Toneladas",
+          "area_colhida_ha": 1900
+        },
+        {
+          "produto": "Mandioca",
+          "valor": 3200000.0,
+          "quantidade": 4100,
+          "unidade": "Toneladas",
+          "area_colhida_ha": 210
+        },
+        {
+          "produto": "Erva-mate (folha verde)",
+          "valor": 2600000.0,
+          "quantidade": 2300,
+          "unidade": "Toneladas",
+          "area_colhida_ha": 380
+        },
+        {
+          "produto": "Laranja",
+          "valor": 1100000.0,
+          "quantidade": 1500,
+          "unidade": "Toneladas",
+          "area_colhida_ha": 60
+        }
+      ],
+      "valor_total": 297300000.0,
+      "fonte": "DADOS FICTÍCIOS"
+    },
+    "rebanhos": {
+      "ano": 2024,
+      "itens": [
+        {
+          "tipo": "Galináceos - total",
+          "cabecas": 412000.0
+        },
+        {
+          "tipo": "Bovino",
+          "cabecas": 38500.0
+        },
+        {
+          "tipo": "Suíno - total",
+          "cabecas": 21400.0
+        },
+        {
+          "tipo": "Ovino",
+          "cabecas": 4200.0
+        },
+        {
+          "tipo": "Equino",
+          "cabecas": 1300.0
+        }
+      ],
+      "fonte": "DADOS FICTÍCIOS"
+    }
+  }
+}

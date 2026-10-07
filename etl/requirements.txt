@@ -1,0 +1,4 @@
+# Necessário apenas para os dados do Ministério do Trabalho (RAIS / Novo CAGED).
+# Os dados do IBGE usam somente a biblioteca padrão do Python.
+basedosdados>=2.0
+pandas>=2.0
