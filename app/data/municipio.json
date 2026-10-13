@@ -1,6 +1,6 @@
 {
   "meta": {
-    "gerado_em": "2026-10-13T18:03:59+00:00",
+    "gerado_em": "2026-10-13T18:09:53+00:00",
     "amostra": false,
     "municipio": {
       "codigo_ibge": "4116604",
@@ -26,6 +26,10 @@
       },
       {
         "etapa": "trabalho_cempre",
+        "ok": true
+      },
+      {
+        "etapa": "caged_tabelas",
         "ok": true
       }
     ]
@@ -553,8 +557,650 @@
     "fonte": "IBGE - Cadastro Central de Empresas (CEMPRE), tabelas 1685, 9509 e 9528 · emprego = pessoal ocupado assalariado em 31/12"
   },
   "caged": {
-    "serie": [],
-    "fonte": "Novo CAGED não coletado (informe --billing-project)"
+    "serie": [
+      {
+        "ano": 2020,
+        "mes": 1,
+        "estoque": 299,
+        "admissoes": 8,
+        "desligamentos": 6,
+        "saldo": 2
+      },
+      {
+        "ano": 2020,
+        "mes": 2,
+        "estoque": 296,
+        "admissoes": 9,
+        "desligamentos": 12,
+        "saldo": -3
+      },
+      {
+        "ano": 2020,
+        "mes": 3,
+        "estoque": 298,
+        "admissoes": 5,
+        "desligamentos": 3,
+        "saldo": 2
+      },
+      {
+        "ano": 2020,
+        "mes": 4,
+        "estoque": 299,
+        "admissoes": 3,
+        "desligamentos": 2,
+        "saldo": 1
+      },
+      {
+        "ano": 2020,
+        "mes": 5,
+        "estoque": 295,
+        "admissoes": 2,
+        "desligamentos": 6,
+        "saldo": -4
+      },
+      {
+        "ano": 2020,
+        "mes": 6,
+        "estoque": 301,
+        "admissoes": 16,
+        "desligamentos": 10,
+        "saldo": 6
+      },
+      {
+        "ano": 2020,
+        "mes": 7,
+        "estoque": 304,
+        "admissoes": 7,
+        "desligamentos": 4,
+        "saldo": 3
+      },
+      {
+        "ano": 2020,
+        "mes": 8,
+        "estoque": 300,
+        "admissoes": 1,
+        "desligamentos": 5,
+        "saldo": -4
+      },
+      {
+        "ano": 2020,
+        "mes": 9,
+        "estoque": 301,
+        "admissoes": 7,
+        "desligamentos": 6,
+        "saldo": 1
+      },
+      {
+        "ano": 2020,
+        "mes": 10,
+        "estoque": 307,
+        "admissoes": 10,
+        "desligamentos": 4,
+        "saldo": 6
+      },
+      {
+        "ano": 2020,
+        "mes": 11,
+        "estoque": 304,
+        "admissoes": 3,
+        "desligamentos": 6,
+        "saldo": -3
+      },
+      {
+        "ano": 2020,
+        "mes": 12,
+        "estoque": 296,
+        "admissoes": 1,
+        "desligamentos": 9,
+        "saldo": -8
+      },
+      {
+        "ano": 2021,
+        "mes": 1,
+        "estoque": 282,
+        "admissoes": 12,
+        "desligamentos": 26,
+        "saldo": -14
+      },
+      {
+        "ano": 2021,
+        "mes": 2,
+        "estoque": 294,
+        "admissoes": 15,
+        "desligamentos": 3,
+        "saldo": 12
+      },
+      {
+        "ano": 2021,
+        "mes": 3,
+        "estoque": 295,
+        "admissoes": 4,
+        "desligamentos": 3,
+        "saldo": 1
+      },
+      {
+        "ano": 2021,
+        "mes": 4,
+        "estoque": 309,
+        "admissoes": 22,
+        "desligamentos": 8,
+        "saldo": 14
+      },
+      {
+        "ano": 2021,
+        "mes": 5,
+        "estoque": 311,
+        "admissoes": 10,
+        "desligamentos": 8,
+        "saldo": 2
+      },
+      {
+        "ano": 2021,
+        "mes": 6,
+        "estoque": 311,
+        "admissoes": 6,
+        "desligamentos": 6,
+        "saldo": 0
+      },
+      {
+        "ano": 2021,
+        "mes": 7,
+        "estoque": 300,
+        "admissoes": 11,
+        "desligamentos": 22,
+        "saldo": -11
+      },
+      {
+        "ano": 2021,
+        "mes": 8,
+        "estoque": 315,
+        "admissoes": 23,
+        "desligamentos": 8,
+        "saldo": 15
+      },
+      {
+        "ano": 2021,
+        "mes": 9,
+        "estoque": 313,
+        "admissoes": 4,
+        "desligamentos": 6,
+        "saldo": -2
+      },
+      {
+        "ano": 2021,
+        "mes": 10,
+        "estoque": 305,
+        "admissoes": 9,
+        "desligamentos": 17,
+        "saldo": -8
+      },
+      {
+        "ano": 2021,
+        "mes": 11,
+        "estoque": 307,
+        "admissoes": 7,
+        "desligamentos": 5,
+        "saldo": 2
+      },
+      {
+        "ano": 2021,
+        "mes": 12,
+        "estoque": 298,
+        "admissoes": 3,
+        "desligamentos": 12,
+        "saldo": -9
+      },
+      {
+        "ano": 2022,
+        "mes": 1,
+        "estoque": 293,
+        "admissoes": 1,
+        "desligamentos": 6,
+        "saldo": -5
+      },
+      {
+        "ano": 2022,
+        "mes": 2,
+        "estoque": 287,
+        "admissoes": 2,
+        "desligamentos": 8,
+        "saldo": -6
+      },
+      {
+        "ano": 2022,
+        "mes": 3,
+        "estoque": 301,
+        "admissoes": 16,
+        "desligamentos": 2,
+        "saldo": 14
+      },
+      {
+        "ano": 2022,
+        "mes": 4,
+        "estoque": 301,
+        "admissoes": 4,
+        "desligamentos": 4,
+        "saldo": 0
+      },
+      {
+        "ano": 2022,
+        "mes": 5,
+        "estoque": 303,
+        "admissoes": 4,
+        "desligamentos": 2,
+        "saldo": 2
+      },
+      {
+        "ano": 2022,
+        "mes": 6,
+        "estoque": 315,
+        "admissoes": 15,
+        "desligamentos": 3,
+        "saldo": 12
+      },
+      {
+        "ano": 2022,
+        "mes": 7,
+        "estoque": 309,
+        "admissoes": 2,
+        "desligamentos": 8,
+        "saldo": -6
+      },
+      {
+        "ano": 2022,
+        "mes": 8,
+        "estoque": 340,
+        "admissoes": 37,
+        "desligamentos": 6,
+        "saldo": 31
+      },
+      {
+        "ano": 2022,
+        "mes": 9,
+        "estoque": 351,
+        "admissoes": 14,
+        "desligamentos": 3,
+        "saldo": 11
+      },
+      {
+        "ano": 2022,
+        "mes": 10,
+        "estoque": 348,
+        "admissoes": 7,
+        "desligamentos": 10,
+        "saldo": -3
+      },
+      {
+        "ano": 2022,
+        "mes": 11,
+        "estoque": 348,
+        "admissoes": 5,
+        "desligamentos": 5,
+        "saldo": 0
+      },
+      {
+        "ano": 2022,
+        "mes": 12,
+        "estoque": 331,
+        "admissoes": 4,
+        "desligamentos": 21,
+        "saldo": -17
+      },
+      {
+        "ano": 2023,
+        "mes": 1,
+        "estoque": 339,
+        "admissoes": 12,
+        "desligamentos": 4,
+        "saldo": 8
+      },
+      {
+        "ano": 2023,
+        "mes": 2,
+        "estoque": 337,
+        "admissoes": 7,
+        "desligamentos": 9,
+        "saldo": -2
+      },
+      {
+        "ano": 2023,
+        "mes": 3,
+        "estoque": 346,
+        "admissoes": 18,
+        "desligamentos": 9,
+        "saldo": 9
+      },
+      {
+        "ano": 2023,
+        "mes": 4,
+        "estoque": 347,
+        "admissoes": 10,
+        "desligamentos": 9,
+        "saldo": 1
+      },
+      {
+        "ano": 2023,
+        "mes": 5,
+        "estoque": 367,
+        "admissoes": 29,
+        "desligamentos": 9,
+        "saldo": 20
+      },
+      {
+        "ano": 2023,
+        "mes": 6,
+        "estoque": 364,
+        "admissoes": 10,
+        "desligamentos": 13,
+        "saldo": -3
+      },
+      {
+        "ano": 2023,
+        "mes": 7,
+        "estoque": 374,
+        "admissoes": 14,
+        "desligamentos": 4,
+        "saldo": 10
+      },
+      {
+        "ano": 2023,
+        "mes": 8,
+        "estoque": 344,
+        "admissoes": 10,
+        "desligamentos": 40,
+        "saldo": -30
+      },
+      {
+        "ano": 2023,
+        "mes": 9,
+        "estoque": 347,
+        "admissoes": 7,
+        "desligamentos": 4,
+        "saldo": 3
+      },
+      {
+        "ano": 2023,
+        "mes": 10,
+        "estoque": 337,
+        "admissoes": 4,
+        "desligamentos": 14,
+        "saldo": -10
+      },
+      {
+        "ano": 2023,
+        "mes": 11,
+        "estoque": 328,
+        "admissoes": 1,
+        "desligamentos": 10,
+        "saldo": -9
+      },
+      {
+        "ano": 2023,
+        "mes": 12,
+        "estoque": 318,
+        "admissoes": 7,
+        "desligamentos": 17,
+        "saldo": -10
+      },
+      {
+        "ano": 2024,
+        "mes": 1,
+        "estoque": 315,
+        "admissoes": 6,
+        "desligamentos": 9,
+        "saldo": -3
+      },
+      {
+        "ano": 2024,
+        "mes": 2,
+        "estoque": 312,
+        "admissoes": 7,
+        "desligamentos": 10,
+        "saldo": -3
+      },
+      {
+        "ano": 2024,
+        "mes": 3,
+        "estoque": 309,
+        "admissoes": 8,
+        "desligamentos": 11,
+        "saldo": -3
+      },
+      {
+        "ano": 2024,
+        "mes": 4,
+        "estoque": 326,
+        "admissoes": 23,
+        "desligamentos": 6,
+        "saldo": 17
+      },
+      {
+        "ano": 2024,
+        "mes": 5,
+        "estoque": 336,
+        "admissoes": 15,
+        "desligamentos": 5,
+        "saldo": 10
+      },
+      {
+        "ano": 2024,
+        "mes": 6,
+        "estoque": 336,
+        "admissoes": 8,
+        "desligamentos": 8,
+        "saldo": 0
+      },
+      {
+        "ano": 2024,
+        "mes": 7,
+        "estoque": 338,
+        "admissoes": 10,
+        "desligamentos": 8,
+        "saldo": 2
+      },
+      {
+        "ano": 2024,
+        "mes": 8,
+        "estoque": 332,
+        "admissoes": 8,
+        "desligamentos": 14,
+        "saldo": -6
+      },
+      {
+        "ano": 2024,
+        "mes": 9,
+        "estoque": 330,
+        "admissoes": 7,
+        "desligamentos": 9,
+        "saldo": -2
+      },
+      {
+        "ano": 2024,
+        "mes": 10,
+        "estoque": 323,
+        "admissoes": 3,
+        "desligamentos": 10,
+        "saldo": -7
+      },
+      {
+        "ano": 2024,
+        "mes": 11,
+        "estoque": 313,
+        "admissoes": 5,
+        "desligamentos": 15,
+        "saldo": -10
+      },
+      {
+        "ano": 2024,
+        "mes": 12,
+        "estoque": 292,
+        "admissoes": 2,
+        "desligamentos": 23,
+        "saldo": -21
+      },
+      {
+        "ano": 2025,
+        "mes": 1,
+        "estoque": 289,
+        "admissoes": 12,
+        "desligamentos": 15,
+        "saldo": -3
+      },
+      {
+        "ano": 2025,
+        "mes": 2,
+        "estoque": 289,
+        "admissoes": 8,
+        "desligamentos": 8,
+        "saldo": 0
+      },
+      {
+        "ano": 2025,
+        "mes": 3,
+        "estoque": 298,
+        "admissoes": 15,
+        "desligamentos": 6,
+        "saldo": 9
+      },
+      {
+        "ano": 2025,
+        "mes": 4,
+        "estoque": 305,
+        "admissoes": 14,
+        "desligamentos": 7,
+        "saldo": 7
+      },
+      {
+        "ano": 2025,
+        "mes": 5,
+        "estoque": 327,
+        "admissoes": 27,
+        "desligamentos": 5,
+        "saldo": 22
+      },
+      {
+        "ano": 2025,
+        "mes": 6,
+        "estoque": 329,
+        "admissoes": 10,
+        "desligamentos": 8,
+        "saldo": 2
+      },
+      {
+        "ano": 2025,
+        "mes": 7,
+        "estoque": 336,
+        "admissoes": 15,
+        "desligamentos": 8,
+        "saldo": 7
+      },
+      {
+        "ano": 2025,
+        "mes": 8,
+        "estoque": 326,
+        "admissoes": 7,
+        "desligamentos": 17,
+        "saldo": -10
+      },
+      {
+        "ano": 2025,
+        "mes": 9,
+        "estoque": 329,
+        "admissoes": 10,
+        "desligamentos": 7,
+        "saldo": 3
+      },
+      {
+        "ano": 2025,
+        "mes": 10,
+        "estoque": 326,
+        "admissoes": 9,
+        "desligamentos": 12,
+        "saldo": -3
+      },
+      {
+        "ano": 2025,
+        "mes": 11,
+        "estoque": 322,
+        "admissoes": 3,
+        "desligamentos": 7,
+        "saldo": -4
+      },
+      {
+        "ano": 2025,
+        "mes": 12,
+        "estoque": 295,
+        "admissoes": 7,
+        "desligamentos": 34,
+        "saldo": -27
+      },
+      {
+        "ano": 2026,
+        "mes": 1,
+        "estoque": 289,
+        "admissoes": 2,
+        "desligamentos": 8,
+        "saldo": -6
+      },
+      {
+        "ano": 2026,
+        "mes": 2,
+        "estoque": 287,
+        "admissoes": 5,
+        "desligamentos": 7,
+        "saldo": -2
+      },
+      {
+        "ano": 2026,
+        "mes": 3,
+        "estoque": 283,
+        "admissoes": 3,
+        "desligamentos": 7,
+        "saldo": -4
+      },
+      {
+        "ano": 2026,
+        "mes": 4,
+        "estoque": 292,
+        "admissoes": 13,
+        "desligamentos": 4,
+        "saldo": 9
+      },
+      {
+        "ano": 2026,
+        "mes": 5,
+        "estoque": 287,
+        "admissoes": 4,
+        "desligamentos": 9,
+        "saldo": -5
+      },
+      {
+        "ano": 2026,
+        "mes": 6,
+        "estoque": 284,
+        "admissoes": 3,
+        "desligamentos": 6,
+        "saldo": -3
+      },
+      {
+        "ano": 2026,
+        "mes": 7,
+        "estoque": 283,
+        "admissoes": 5,
+        "desligamentos": 6,
+        "saldo": -1
+      },
+      {
+        "ano": 2026,
+        "mes": 8,
+        "estoque": 289,
+        "admissoes": 13,
+        "desligamentos": 7,
+        "saldo": 6
+      }
+    ],
+    "competencia": "202608",
+    "fonte": "MTE - Novo CAGED, Tabela 8.1 (série com ajustes)"
   },
   "estabelecimentos": {
     "sigla": "CEMPRE",

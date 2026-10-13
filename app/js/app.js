@@ -248,7 +248,7 @@
     const maxEmp = Math.max(...setores.map((x) => x.empregos), 1);
     return {
       html: `
-        ${secao('Trabalho e renda', sigla('rais') === 'CEMPRE' ? 'Emprego assalariado e salários (Cadastro Central de Empresas – IBGE)' : 'Emprego formal (RAIS) e movimentação mensal (Novo CAGED)')}
+        ${secao('Trabalho e renda', sigla('rais') === 'CEMPRE' ? `Emprego assalariado e salários (CEMPRE – IBGE)${caged.length ? ' e saldo mensal (Novo CAGED – MTE)' : ''}` : 'Emprego formal (RAIS) e movimentação mensal (Novo CAGED)')}
         <div class="kpis">
           ${kpi({ label: 'Empregos formais', icone: 'briefcase', valorHTML: r.rais && Fmt.int(r.rais.empregos), deltaHTML: delta(variacao(r.rais?.empregos, r.raisAnt?.empregos)), ref: r.rais && `31/12/${r.rais.ano}` })}
           ${kpi({ label: 'Remuneração média', icone: 'wallet', valorHTML: r.rais && Fmt.brl(r.rais.remuneracao_media), deltaHTML: delta(variacao(r.rais?.remuneracao_media, r.raisAnt?.remuneracao_media)), ref: r.rais && `${r.rais.ano} · nominal` })}
@@ -366,8 +366,9 @@
     $('#place-chips').innerHTML = chips.map((c) => `<span class="chip">${esc(c)}</span>`).join('');
     $('#generated').textContent = D.meta.gerado_em ? `Dados atualizados em ${Fmt.data(D.meta.gerado_em)}.` : '';
     $('#sample-banner').hidden = !D.meta.amostra;
-    const mte = sigla('rais') === 'RAIS' || D.caged.serie.length;
-    $('#sources').textContent = mte ? 'Fontes: IBGE (SIDRA) e Ministério do Trabalho (RAIS e Novo CAGED).' : 'Fonte: IBGE (SIDRA) – Censo, Estimativas, PIB dos Municípios, CEMPRE, PAM e PPM.';
+    const mte = [sigla('rais') === 'RAIS' && 'RAIS', D.caged.serie.length && 'Novo CAGED'].filter(Boolean);
+    $('#sources').textContent = `Fontes: IBGE (Censo, Estimativas, PIB dos Municípios, ${sigla('rais') === 'CEMPRE' ? 'CEMPRE, ' : ''}PAM e PPM)`
+      + (mte.length ? ` e Ministério do Trabalho (${mte.join(' e ')}).` : '.');
   }
 
   function lerTema() { try { return localStorage.getItem('tema'); } catch { return null; } }

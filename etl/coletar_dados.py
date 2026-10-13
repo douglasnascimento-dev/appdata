@@ -25,8 +25,8 @@ Uso
     python etl/coletar_dados.py --municipio "Pato Branco" --uf PR
     python etl/coletar_dados.py --municipio 4118501 --billing-project meu-projeto-gcp
 
-Sem --billing-project, emprego/salário/estabelecimentos vêm do CEMPRE (IBGE)
-e o saldo mensal de empregos (exclusivo do Novo CAGED) fica vazio.
+Sem --billing-project, emprego/salário/estabelecimentos vêm do CEMPRE (IBGE) e o
+saldo mensal vem das tabelas oficiais do Novo CAGED (planilha publicada pelo MTE).
 """
 
 from __future__ import annotations
@@ -34,6 +34,7 @@ from __future__ import annotations
 import argparse
 import gzip
 import json
+import re
 import sys
 import time
 import unicodedata
@@ -392,6 +393,90 @@ def coletar_cempre(codigo: str) -> dict:
 
 
 # --------------------------------------------------------------------------- #
+# Novo CAGED - tabelas oficiais do MTE (sem BigQuery)
+# --------------------------------------------------------------------------- #
+# Pasta pública do Google Drive onde o MTE publica as "Tabelas.xlsx" mensais
+# (link "Tabelas.xlsx" das páginas do Novo CAGED em gov.br/trabalho-e-emprego).
+# Estrutura: <ano>/<AAAAMM>/3-tabelas_<Mês> de <ano>.xlsx
+PASTA_CAGED_DRIVE = "1F89h6odTPGIGMb9eDiJKCute9W89QmqN"
+CACHE_DIR = Path(__file__).resolve().parent / ".cache"
+MESES = {m: i for i, m in enumerate(
+    ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho",
+     "agosto", "setembro", "outubro", "novembro", "dezembro"], start=1)}
+
+
+def _drive_listar(pasta_id: str) -> list[tuple[str, str]]:
+    """Lista (nome, id) de uma pasta pública do Google Drive."""
+    import html
+    url = f"https://drive.google.com/embeddedfolderview?id={pasta_id}"
+    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "appdata-etl/1.0"}), timeout=60) as r:
+        pagina = r.read().decode("utf-8")
+    itens = []
+    for m in re.finditer(r'<a href="([^"]+)"[^>]*>.*?flip-entry-title">([^<]+)<', pagina, re.S):
+        id_ = re.search(r"/(?:folders|d)/([\w-]+)", m.group(1))
+        if id_:
+            itens.append((html.unescape(m.group(2)).strip(), id_.group(1)))
+    return itens
+
+
+def _baixar_tabelas_caged() -> tuple[Path, str]:
+    """Baixa (com cache) a planilha do mês mais recente. Retorna (arquivo, 'AAAAMM')."""
+    anos = sorted((n, i) for n, i in _drive_listar(PASTA_CAGED_DRIVE) if n.isdigit())
+    if not anos:
+        raise RuntimeError("pasta de tabelas do CAGED vazia ou fora do ar")
+    meses = sorted((n, i) for n, i in _drive_listar(anos[-1][1]) if n.isdigit())
+    if not meses:  # janeiro ainda não publicado: usa o ano anterior
+        meses = sorted((n, i) for n, i in _drive_listar(anos[-2][1]) if n.isdigit())
+    competencia, pasta_mes = meses[-1]
+    planilhas = [(n, i) for n, i in _drive_listar(pasta_mes) if n.lower().endswith(".xlsx") and "tabela" in n.lower()]
+    if not planilhas:
+        raise RuntimeError(f"planilha de tabelas não encontrada em {competencia}")
+    destino = CACHE_DIR / f"caged_tabelas_{competencia}.xlsx"
+    if not destino.exists():
+        CACHE_DIR.mkdir(exist_ok=True)
+        url = f"https://drive.usercontent.google.com/download?id={planilhas[0][1]}&export=download&confirm=t"
+        log(f"  baixando {planilhas[0][0]} (~45 MB)")
+        tmp = destino.with_suffix(".part")
+        urllib.request.urlretrieve(url, tmp)
+        tmp.rename(destino)
+    return destino, competencia
+
+
+def coletar_caged_tabelas(codigo: str) -> dict:
+    """Saldo mensal do Novo CAGED pela Tabela 8.1 (série com ajustes, por município, desde 2020)."""
+    try:
+        import openpyxl
+    except ImportError as e:
+        raise RuntimeError("instale o openpyxl (pip install openpyxl) para ler o CAGED") from e
+    log("Saldo mensal de empregos (MTE - Novo CAGED, tabelas oficiais)")
+    arquivo, competencia = _baixar_tabelas_caged()
+    log(f"  lendo Tabela 8.1 de {competencia} (leva ~20 s)")
+    wb = openpyxl.load_workbook(arquivo, read_only=True)
+    linhas = wb["Tabela 8.1"].iter_rows(min_row=5, values_only=True)
+    meses_cab, campos_cab = next(linhas), next(linhas)
+    codigo6 = int(codigo[:6])  # o CAGED usa o código IBGE sem o dígito verificador
+    linha = next((l for l in linhas if l[2] == codigo6), None)
+    wb.close()
+    if linha is None:
+        raise RuntimeError(f"município {codigo6} não encontrado na Tabela 8.1")
+
+    serie: dict[tuple[int, int], dict] = {}
+    chave = None
+    nomes = {"estoque": "estoque", "admissões": "admissoes", "desligamentos": "desligamentos", "saldos": "saldo"}
+    for rotulo, campo, valor in zip(meses_cab, campos_cab, linha):
+        if isinstance(rotulo, str):
+            # "Janeiro/2020" abre um bloco de colunas; os blocos finais (acumulados) são ignorados
+            m = re.fullmatch(r"\s*(\w+)/(\d{4})\s*", rotulo)
+            chave = (int(m.group(2)), MESES[m.group(1).lower()]) if m and m.group(1).lower() in MESES else None
+        nome = nomes.get(str(campo or "").strip().lower())
+        if chave and nome and isinstance(valor, (int, float)):
+            serie.setdefault(chave, {"ano": chave[0], "mes": chave[1]})[nome] = int(valor)
+    itens = [v for _, v in sorted(serie.items()) if "saldo" in v]
+    return {"serie": itens, "competencia": competencia,
+            "fonte": "MTE - Novo CAGED, Tabela 8.1 (série com ajustes)"}
+
+
+# --------------------------------------------------------------------------- #
 # Ministério do Trabalho (RAIS / Novo CAGED) via Base dos Dados - BigQuery
 # --------------------------------------------------------------------------- #
 def _bq(billing_project: str, sql: str):
@@ -533,10 +618,13 @@ def main() -> None:
     if args.billing_project:
         trabalho = executar("trabalho_rais_caged", status, coletar_trabalho, codigo, args.billing_project, args.anos)
     else:
-        log("Sem --billing-project: usando CEMPRE/IBGE no lugar da RAIS; saldo do CAGED não será coletado.")
+        log("Sem --billing-project: usando CEMPRE/IBGE (emprego) e as tabelas oficiais do Novo CAGED (saldo mensal).")
     if trabalho is None:
         trabalho = executar("trabalho_cempre", status, coletar_cempre, codigo,
                             padrao=trabalho_vazio("indisponível"))
+        caged = executar("caged_tabelas", status, coletar_caged_tabelas, codigo)
+        if caged:
+            trabalho["caged"] = caged
 
     saida = {
         "meta": {
