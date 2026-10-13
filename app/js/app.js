@@ -35,6 +35,8 @@
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const ultimo = (arr) => (arr && arr.length ? arr[arr.length - 1] : null);
   const penultimo = (arr) => (arr && arr.length > 1 ? arr[arr.length - 2] : null);
+  const ultimoCom = (arr, campo) => [...(arr || [])].reverse().find((x) => Fmt.isNum(x[campo])) || null;
+  const sigla = (bloco) => D[bloco].sigla || 'RAIS';
   const variacao = (a, b) => (Fmt.isNum(a) && Fmt.isNum(b) && b !== 0 ? (a / b - 1) * 100 : null);
 
   // ------------------------------------------------------------------ //
@@ -79,7 +81,7 @@
   const vazio = (msg = 'Sem dados para este indicador.', dica = '') =>
     `<div class="empty-state"><strong>${esc(msg)}</strong>${dica ? `<span>${dica}</span>` : ''}</div>`;
 
-  const dicaTrabalho = 'Rode o ETL com <code>--billing-project</code> para coletar RAIS e CAGED.';
+  const dicaTrabalho = 'O saldo mensal vem do Novo CAGED: rode o ETL com <code>--billing-project</code>.';
 
   function legenda(itens) {
     const cores = Charts.paleta();
@@ -111,6 +113,7 @@
     return {
       pop: ultimo(pop), popAnt: penultimo(pop),
       pib: ultimo(pib), pibAnt: penultimo(pib),
+      pibVab: ultimoCom(pib, 'vab_total'),
       rais: ultimo(rais), raisAnt: penultimo(rais),
       caged12: ult12.length ? soma(ult12) : null,
       caged12Ant: ant12.length === 12 ? soma(ant12) : null,
@@ -127,26 +130,31 @@
   function viewVisao() {
     const r = resumo();
     const pop = D.populacao.serie, pib = D.pib.serie, rais = D.rais.serie;
+    const temCaged = D.caged.serie.length > 0;
+    const saldoAnual = rais.slice(1).map((x, i) => ({ ano: x.ano, saldo: x.empregos - rais[i].empregos })).slice(-12);
     const kpis = [
       kpi({ label: 'População', icone: 'people', valorHTML: r.pop && Fmt.int(r.pop.valor), deltaHTML: delta(r.pop?.variacao_pct), ref: r.pop && `${r.pop.ano} · ${r.pop.fonte}`, spark: pop, sparkId: 'sp-pop' }),
       kpi({ label: 'PIB municipal', icone: 'chart', valorHTML: r.pib && compactHTML(r.pib.pib, 'R$ '), deltaHTML: delta(variacao(r.pib?.pib, r.pibAnt?.pib)), ref: r.pib && `${r.pib.ano} · IBGE`, spark: pib, sparkId: 'sp-pib' }),
       kpi({ label: 'PIB per capita', icone: 'money', valorHTML: r.pib && Fmt.brl(r.pib.pib_per_capita), deltaHTML: delta(variacao(r.pib?.pib_per_capita, r.pibAnt?.pib_per_capita)), ref: r.pib && `${r.pib.ano} · IBGE`, spark: pib, sparkId: 'sp-pibpc' }),
-      kpi({ label: 'Empregos formais', icone: 'briefcase', valorHTML: r.rais && Fmt.int(r.rais.empregos), deltaHTML: delta(variacao(r.rais?.empregos, r.raisAnt?.empregos)), ref: r.rais && `${r.rais.ano} · RAIS`, spark: rais, sparkId: 'sp-emp' }),
-      kpi({ label: 'Saldo de empregos (12 meses)', icone: 'trend', valorHTML: Fmt.isNum(r.caged12) && Fmt.signed(r.caged12), deltaHTML: Fmt.isNum(r.caged12Ant) ? `<span class="delta flat">ant.: ${Fmt.signed(r.caged12Ant)}</span>` : '', ref: r.cagedPeriodo && `${r.cagedPeriodo} · CAGED`, spark: D.caged.serie.slice(-24), sparkId: 'sp-caged' }),
-      kpi({ label: 'Remuneração média', icone: 'wallet', valorHTML: r.rais && Fmt.brl(r.rais.remuneracao_media), deltaHTML: delta(variacao(r.rais?.remuneracao_media, r.raisAnt?.remuneracao_media)), ref: r.rais && `${r.rais.ano} · RAIS (nominal)`, spark: rais, sparkId: 'sp-rem' }),
-      kpi({ label: 'Estabelecimentos', icone: 'store', valorHTML: r.estab && Fmt.int(r.estab.total), deltaHTML: delta(variacao(r.estab?.total, r.estabAnt?.total)), ref: r.estab && `${r.estab.ano} · RAIS`, spark: D.estabelecimentos.serie, sparkId: 'sp-est' }),
+      kpi({ label: 'Empregos formais', icone: 'briefcase', valorHTML: r.rais && Fmt.int(r.rais.empregos), deltaHTML: delta(variacao(r.rais?.empregos, r.raisAnt?.empregos)), ref: r.rais && `${r.rais.ano} · ${sigla('rais')}`, spark: rais, sparkId: 'sp-emp' }),
+      temCaged ? kpi({ label: 'Saldo de empregos (12 meses)', icone: 'trend', valorHTML: Fmt.isNum(r.caged12) && Fmt.signed(r.caged12), deltaHTML: Fmt.isNum(r.caged12Ant) ? `<span class="delta flat">ant.: ${Fmt.signed(r.caged12Ant)}</span>` : '', ref: r.cagedPeriodo && `${r.cagedPeriodo} · CAGED`, spark: D.caged.serie.slice(-24), sparkId: 'sp-caged' })
+        : kpi({ label: 'Saldo anual de empregos', icone: 'trend', valorHTML: r.rais && r.raisAnt && Fmt.signed(r.rais.empregos - r.raisAnt.empregos), ref: r.rais && r.raisAnt && `${r.raisAnt.ano}→${r.rais.ano} · ${sigla('rais')}`, spark: saldoAnual, sparkId: 'sp-caged' }),
+      kpi({ label: 'Remuneração média', icone: 'wallet', valorHTML: r.rais && Fmt.brl(r.rais.remuneracao_media), deltaHTML: delta(variacao(r.rais?.remuneracao_media, r.raisAnt?.remuneracao_media)), ref: r.rais && `${r.rais.ano} · ${sigla('rais')} (nominal)`, spark: rais, sparkId: 'sp-rem' }),
+      kpi({ label: 'Estabelecimentos', icone: 'store', valorHTML: r.estab && Fmt.int(r.estab.total), deltaHTML: delta(variacao(r.estab?.total, r.estabAnt?.total)), ref: r.estab && `${r.estab.ano} · ${sigla('estabelecimentos')}`, spark: D.estabelecimentos.serie, sparkId: 'sp-est' }),
       kpi({ label: 'Valor da produção agrícola', icone: 'leaf', valorHTML: r.lav.itens.length ? compactHTML(r.lav.valor_total, 'R$ ') : null, ref: r.lav.ano && `${r.lav.ano} · PAM/IBGE` }),
     ];
 
-    const temVab = r.pib && SETORES_VAB.some(([k]) => Fmt.isNum(r.pib[k]));
+    const temVab = !!r.pibVab;
     return {
       html: `
         <div class="kpis">${kpis.join('')}</div>
         <div class="grid">
-          ${card({ titulo: 'Composição da economia', sub: r.pib ? `Valor adicionado bruto por setor · ${r.pib.ano}` : '', span: 5,
+          ${card({ titulo: 'Composição da economia', sub: r.pibVab ? `Valor adicionado bruto por setor · ${r.pibVab.ano}` : '', span: 5,
             corpo: temVab ? canvas('ch-vab', 'short') + legenda(SETORES_VAB.map(([, n]) => n)) : vazio(), fonte: D.pib.fonte })}
-          ${card({ titulo: 'Saldo mensal de empregos', sub: 'Admissões menos desligamentos · últimos 12 meses', span: 7,
-            corpo: D.caged.serie.length ? canvas('ch-caged12') : vazio('Sem dados do CAGED.', dicaTrabalho), fonte: D.caged.fonte })}
+          ${temCaged
+            ? card({ titulo: 'Saldo mensal de empregos', sub: 'Admissões menos desligamentos · últimos 12 meses', span: 7, corpo: canvas('ch-caged12'), fonte: D.caged.fonte })
+            : card({ titulo: 'Saldo anual de empregos', sub: 'Variação do número de empregos formais em relação ao ano anterior', span: 7,
+                corpo: saldoAnual.length ? canvas('ch-caged12') : vazio(), fonte: D.rais.fonte })}
         </div>`,
       after() {
         const cor = Charts.paleta();
@@ -155,11 +163,12 @@
         spark('sp-pib', pib, 'pib', cor[1]);
         spark('sp-pibpc', pib, 'pib_per_capita', cor[2]);
         spark('sp-emp', rais, 'empregos', cor[3]);
-        spark('sp-caged', D.caged.serie.slice(-24), 'saldo', cor[4]);
+        spark('sp-caged', temCaged ? D.caged.serie.slice(-24) : saldoAnual, 'saldo', cor[4]);
         spark('sp-rem', rais, 'remuneracao_media', cor[5]);
         spark('sp-est', D.estabelecimentos.serie, 'total', cor[6]);
-        if (temVab) Charts.doughnut($('#ch-vab'), { labels: SETORES_VAB.map(([, n]) => n), data: SETORES_VAB.map(([k]) => r.pib[k]), fmt: Fmt.brlCompact });
+        if (temVab) Charts.doughnut($('#ch-vab'), { labels: SETORES_VAB.map(([, n]) => n), data: SETORES_VAB.map(([k]) => r.pibVab[k]), fmt: Fmt.brlCompact });
         const c12 = D.caged.serie.slice(-12);
+        if (!temCaged && saldoAnual.length) Charts.bar($('#ch-caged12'), { labels: saldoAnual.map((x) => x.ano), series: [{ label: 'Saldo', data: saldoAnual.map((x) => x.saldo) }], fmtY: Fmt.signed, signColors: true });
         if (c12.length) Charts.bar($('#ch-caged12'), { labels: c12.map((x) => Fmt.mes(x.ano, x.mes)), series: [{ label: 'Saldo', data: c12.map((x) => x.saldo) }], fmtY: Fmt.signed, signColors: true });
       },
     };
@@ -198,28 +207,31 @@
     const s = D.pib.serie;
     if (!s.length) return { html: secao('Economia') + card({ titulo: 'PIB municipal', corpo: vazio() }) };
     const p = ultimo(s), a = penultimo(s);
-    const vabTotal = SETORES_VAB.reduce((t, [k]) => t + (p[k] || 0), 0);
-    const [maiorK, maiorN] = SETORES_VAB.reduce((m, x) => ((p[x[0]] || 0) > (p[m[0]] || 0) ? x : m));
+    // Os anos mais recentes saem só com o PIB total; a divisão por setor vem depois
+    const pv = ultimoCom(s, 'vab_total') || p;
+    const sv = s.filter((x) => Fmt.isNum(x.vab_total));
+    const vabTotal = SETORES_VAB.reduce((t, [k]) => t + (pv[k] || 0), 0);
+    const [maiorK, maiorN] = SETORES_VAB.reduce((m, x) => ((pv[x[0]] || 0) > (pv[m[0]] || 0) ? x : m));
     return {
       html: `
         ${secao('Economia', `PIB dos Municípios · valores correntes · último ano disponível ${p.ano}`)}
         <div class="kpis">
           ${kpi({ label: 'PIB', icone: 'chart', valorHTML: compactHTML(p.pib, 'R$ '), deltaHTML: delta(variacao(p.pib, a?.pib)), ref: `${p.ano} · nominal` })}
           ${kpi({ label: 'PIB per capita', icone: 'money', valorHTML: Fmt.brl(p.pib_per_capita), deltaHTML: delta(variacao(p.pib_per_capita, a?.pib_per_capita)), ref: `${p.ano}` })}
-          ${kpi({ label: 'Setor mais relevante', icone: 'trend', valorHTML: esc(maiorN), ref: `${Fmt.dec1((p[maiorK] / vabTotal) * 100)}% do VAB` })}
-          ${kpi({ label: 'Impostos líquidos', icone: 'wallet', valorHTML: compactHTML(p.impostos, 'R$ '), ref: `${Fmt.dec1((p.impostos / p.pib) * 100)}% do PIB` })}
+          ${kpi({ label: 'Setor mais relevante', icone: 'trend', valorHTML: esc(maiorN), ref: `${Fmt.dec1((pv[maiorK] / vabTotal) * 100)}% do VAB · ${pv.ano}` })}
+          ${kpi({ label: 'Impostos líquidos', icone: 'wallet', valorHTML: compactHTML(pv.impostos, 'R$ '), ref: `${Fmt.dec1((pv.impostos / pv.pib) * 100)}% do PIB · ${pv.ano}` })}
         </div>
         <div class="grid">
           ${card({ titulo: 'PIB e PIB per capita', sub: 'Barras: PIB · Linha: PIB per capita', span: 8, corpo: canvas('ch-pib', 'tall'), fonte: D.pib.fonte })}
-          ${card({ titulo: `Composição do VAB · ${p.ano}`, span: 4, corpo: canvas('ch-vabd', 'short') + legenda(SETORES_VAB.map(([, n]) => n)) })}
+          ${card({ titulo: `Composição do VAB · ${pv.ano}`, span: 4, corpo: canvas('ch-vabd', 'short') + legenda(SETORES_VAB.map(([, n]) => n)) })}
           ${card({ titulo: 'Valor adicionado por setor ao longo do tempo', sub: 'R$ correntes', span: 12, corpo: canvas('ch-vabs', 'tall') + legenda(SETORES_VAB.map(([, n]) => n)) })}
           ${card({ titulo: 'Tabela', span: 12, corpo: tabela(['Ano', 'PIB', 'Per capita', 'Agropecuária', 'Indústria', 'Serviços', 'Adm. pública'],
             [...s].reverse().map((x) => [x.ano, Fmt.brlCompact(x.pib), Fmt.brl(x.pib_per_capita), ...SETORES_VAB.map(([k]) => Fmt.brlCompact(x[k]))])) })}
         </div>`,
       after() {
         Charts.combo($('#ch-pib'), { labels: s.map((x) => x.ano), bar: { label: 'PIB', data: s.map((x) => x.pib) }, line: { label: 'PIB per capita', data: s.map((x) => x.pib_per_capita) }, fmtBar: Fmt.brlCompact, fmtLine: Fmt.brlCompact });
-        Charts.doughnut($('#ch-vabd'), { labels: SETORES_VAB.map(([, n]) => n), data: SETORES_VAB.map(([k]) => p[k]), fmt: Fmt.brlCompact });
-        Charts.bar($('#ch-vabs'), { labels: s.map((x) => x.ano), series: SETORES_VAB.map(([k, n]) => ({ label: n, data: s.map((x) => x[k]) })), fmtY: Fmt.brlCompact, stacked: true });
+        Charts.doughnut($('#ch-vabd'), { labels: SETORES_VAB.map(([, n]) => n), data: SETORES_VAB.map(([k]) => pv[k]), fmt: Fmt.brlCompact });
+        Charts.bar($('#ch-vabs'), { labels: sv.map((x) => x.ano), series: SETORES_VAB.map(([k, n]) => ({ label: n, data: sv.map((x) => x[k]) })), fmtY: Fmt.brlCompact, stacked: true });
       },
     };
   }
@@ -231,18 +243,24 @@
     }
     const r = resumo();
     const c24 = caged.slice(-24);
+    const saldoAnual = rais.slice(1).map((x, i) => ({ ano: x.ano, saldo: x.empregos - rais[i].empregos }));
+    const ultSaldo = ultimo(saldoAnual);
     const maxEmp = Math.max(...setores.map((x) => x.empregos), 1);
     return {
       html: `
-        ${secao('Trabalho e renda', 'Emprego formal (RAIS) e movimentação mensal (Novo CAGED)')}
+        ${secao('Trabalho e renda', sigla('rais') === 'CEMPRE' ? 'Emprego assalariado e salários (Cadastro Central de Empresas – IBGE)' : 'Emprego formal (RAIS) e movimentação mensal (Novo CAGED)')}
         <div class="kpis">
           ${kpi({ label: 'Empregos formais', icone: 'briefcase', valorHTML: r.rais && Fmt.int(r.rais.empregos), deltaHTML: delta(variacao(r.rais?.empregos, r.raisAnt?.empregos)), ref: r.rais && `31/12/${r.rais.ano}` })}
           ${kpi({ label: 'Remuneração média', icone: 'wallet', valorHTML: r.rais && Fmt.brl(r.rais.remuneracao_media), deltaHTML: delta(variacao(r.rais?.remuneracao_media, r.raisAnt?.remuneracao_media)), ref: r.rais && `${r.rais.ano} · nominal` })}
-          ${kpi({ label: 'Saldo (12 meses)', icone: 'trend', valorHTML: Fmt.isNum(r.caged12) && Fmt.signed(r.caged12), ref: r.cagedPeriodo })}
+          ${c24.length
+            ? kpi({ label: 'Saldo (12 meses)', icone: 'trend', valorHTML: Fmt.isNum(r.caged12) && Fmt.signed(r.caged12), ref: r.cagedPeriodo })
+            : kpi({ label: 'Saldo anual', icone: 'trend', valorHTML: ultSaldo && Fmt.signed(ultSaldo.saldo), ref: ultSaldo && `${ultSaldo.ano - 1}→${ultSaldo.ano}` })}
           ${kpi({ label: 'Empregos por mil habitantes', icone: 'people', valorHTML: r.rais && r.pop && Fmt.int((r.rais.empregos / r.pop.valor) * 1000), ref: 'Formalização do mercado' })}
         </div>
         <div class="grid">
-          ${card({ titulo: 'Saldo mensal de empregos', sub: 'Últimos 24 meses', span: 12, corpo: c24.length ? canvas('ch-caged') : vazio('Sem dados do CAGED.'), fonte: D.caged.fonte })}
+          ${c24.length
+            ? card({ titulo: 'Saldo mensal de empregos', sub: 'Últimos 24 meses', span: 12, corpo: canvas('ch-caged'), fonte: D.caged.fonte })
+            : card({ titulo: 'Saldo anual de empregos', sub: 'Variação do estoque em 31/12 · o saldo mensal exige o Novo CAGED (--billing-project)', span: 12, corpo: saldoAnual.length ? canvas('ch-caged') : vazio() })}
           ${card({ titulo: 'Estoque de empregos formais', span: 6, corpo: rais.length ? canvas('ch-emp') : vazio(), fonte: D.rais.fonte })}
           ${card({ titulo: 'Remuneração média mensal', sub: 'Valores nominais', span: 6, corpo: rais.length ? canvas('ch-rem') : vazio() })}
           ${card({ titulo: 'Empregos e remuneração por setor', sub: D.rais.por_setor.ano ? `${D.rais.por_setor.ano}` : '', span: 12,
@@ -253,6 +271,7 @@
               })) : vazio() })}
         </div>`,
       after() {
+        if (!c24.length && saldoAnual.length) Charts.bar($('#ch-caged'), { labels: saldoAnual.map((x) => x.ano), series: [{ label: 'Saldo', data: saldoAnual.map((x) => x.saldo) }], fmtY: Fmt.signed, signColors: true });
         if (c24.length) Charts.bar($('#ch-caged'), { labels: c24.map((x) => Fmt.mes(x.ano, x.mes)), series: [{ label: 'Saldo', data: c24.map((x) => x.saldo) }], fmtY: Fmt.signed, signColors: true });
         if (rais.length) {
           Charts.line($('#ch-emp'), { labels: rais.map((x) => x.ano), series: [{ label: 'Empregos', data: rais.map((x) => x.empregos) }], fmtY: Fmt.compact, fmtTooltip: Fmt.int });
@@ -268,7 +287,7 @@
     const r = resumo();
     return {
       html: `
-        ${secao('Empresas', 'Estabelecimentos com ao menos um empregado formal (RAIS)')}
+        ${secao('Empresas', sigla('estabelecimentos') === 'CEMPRE' ? 'Unidades locais de empresas e outras organizações (CEMPRE – IBGE)' : 'Estabelecimentos com ao menos um empregado formal (RAIS)')}
         <div class="kpis">
           ${kpi({ label: 'Estabelecimentos', icone: 'store', valorHTML: Fmt.int(r.estab.total), deltaHTML: delta(variacao(r.estab.total, r.estabAnt?.total)), ref: `${r.estab.ano}` })}
           ${kpi({ label: 'Por mil habitantes', icone: 'people', valorHTML: r.pop && Fmt.dec1((r.estab.total / r.pop.valor) * 1000), ref: 'Densidade empresarial' })}
@@ -347,6 +366,8 @@
     $('#place-chips').innerHTML = chips.map((c) => `<span class="chip">${esc(c)}</span>`).join('');
     $('#generated').textContent = D.meta.gerado_em ? `Dados atualizados em ${Fmt.data(D.meta.gerado_em)}.` : '';
     $('#sample-banner').hidden = !D.meta.amostra;
+    const mte = sigla('rais') === 'RAIS' || D.caged.serie.length;
+    $('#sources').textContent = mte ? 'Fontes: IBGE (SIDRA) e Ministério do Trabalho (RAIS e Novo CAGED).' : 'Fonte: IBGE (SIDRA) – Censo, Estimativas, PIB dos Municípios, CEMPRE, PAM e PPM.';
   }
 
   function lerTema() { try { return localStorage.getItem('tema'); } catch { return null; } }

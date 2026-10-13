@@ -1,5 +1,5 @@
 /* Service worker: app shell offline + dados com "rede primeiro" */
-const VERSAO = 'painel-v1';
+const VERSAO = 'painel-v2';
 const SHELL = [
   './',
   'index.html',

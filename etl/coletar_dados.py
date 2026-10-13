@@ -11,7 +11,10 @@ IBGE (API SIDRA v3, pública, sem chave):
     - Lavouras ............. tabela 5457 (Produção Agrícola Municipal - PAM)
     - Rebanhos ............. tabela 3939 (Pesquisa da Pecuária Municipal - PPM)
 
-Ministério do Trabalho, via Base dos Dados (BigQuery, opcional):
+IBGE - Cadastro Central de Empresas (padrão, sem chave):
+    - Empregos formais (assalariados), salário médio, estabelecimentos e setores ... tabelas 1685, 9509, 9528
+
+Ministério do Trabalho, via Base dos Dados (BigQuery, opcional - substitui o CEMPRE):
     - Empregos formais, remuneração média, empregos por setor ... RAIS vínculos
     - Estabelecimentos por setor ................................ RAIS estabelecimentos
     - Saldo de empregos (mensal) ................................ Novo CAGED
@@ -22,13 +25,14 @@ Uso
     python etl/coletar_dados.py --municipio "Pato Branco" --uf PR
     python etl/coletar_dados.py --municipio 4118501 --billing-project meu-projeto-gcp
 
-Sem --billing-project, somente os dados do IBGE são coletados; os blocos de
-emprego e estabelecimentos ficam vazios e o app mostra "sem dados".
+Sem --billing-project, emprego/salário/estabelecimentos vêm do CEMPRE (IBGE)
+e o saldo mensal de empregos (exclusivo do Novo CAGED) fica vazio.
 """
 
 from __future__ import annotations
 
 import argparse
+import gzip
 import json
 import sys
 import time
@@ -94,9 +98,13 @@ def http_get_json(url: str, tentativas: int = 4):
     ultimo_erro = None
     for i in range(tentativas):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "appdata-etl/1.0"})
+            req = urllib.request.Request(url, headers={"User-Agent": "appdata-etl/1.0", "Accept-Encoding": "gzip"})
             with urllib.request.urlopen(req, timeout=60) as resp:
-                return json.loads(resp.read().decode("utf-8"))
+                corpo = resp.read()
+            # O IBGE às vezes responde em gzip mesmo sem o cliente pedir
+            if corpo[:2] == b"\x1f\x8b":
+                corpo = gzip.decompress(corpo)
+            return json.loads(corpo.decode("utf-8"))
         except Exception as e:  # noqa: BLE001
             ultimo_erro = e
             espera = 2 ** (i + 1)
@@ -227,6 +235,16 @@ def coletar_populacao(codigo: str) -> dict:
     return {"serie": lista, "fonte": "IBGE - Estimativas de População (6579) e Censo 2022 (4709)"}
 
 
+def populacao_por_ano(populacao: list[dict]) -> dict[int, float]:
+    """Série anual completa; anos sem estimativa (ex.: 2007, 2010, 2023) são interpolados linearmente."""
+    pop = {p["ano"]: p["valor"] for p in populacao}
+    anos = sorted(pop)
+    for a, b in zip(anos, anos[1:]):
+        for ano in range(a + 1, b):
+            pop[ano] = pop[a] + (pop[b] - pop[a]) * (ano - a) / (b - a)
+    return pop
+
+
 def coletar_pib(codigo: str, populacao: list[dict]) -> dict:
     log("PIB e VAB (IBGE)")
     campos = {
@@ -243,7 +261,7 @@ def coletar_pib(codigo: str, populacao: list[dict]) -> dict:
         ano = int(l["periodo"])
         anos.setdefault(ano, {"ano": ano})[campos[l["variavel_id"]]] = l["valor"]
 
-    pop = {p["ano"]: p["valor"] for p in populacao}
+    pop = populacao_por_ano(populacao)
     for ano, item in anos.items():
         # Valores do SIDRA vêm em mil R$ -> converte para R$
         for k in list(item):
@@ -272,6 +290,18 @@ def coletar_agro(codigo: str) -> dict:
             item["valor"] = l["valor"] * 1000 if l["valor"] is not None else None
         else:
             item["area_colhida_ha"] = l["valor"]
+    # Produtos com subdivisão vêm como "Café (em grão) Total" + "Café (em grão) Arábica";
+    # mantém só o total para não contar duas vezes
+    for nome in [n for n in lavouras if n.endswith(" Total")]:
+        base = nome[: -len(" Total")]
+        for sub in [n for n in lavouras if n.startswith(base + " ") and n != nome]:
+            del lavouras[sub]
+        lavouras[nome]["produto"] = base
+    for item in lavouras.values():
+        # No SIDRA, "*" marca produtos cuja quantidade é em mil frutos (abacaxi, coco-da-baía)
+        if item["produto"].endswith("*"):
+            item["produto"] = item["produto"].rstrip("*").strip()
+            item["unidade"] = "Mil frutos"
     lista_lav = sorted((v for v in lavouras.values() if v.get("valor")), key=lambda x: -x["valor"])
 
     rebanhos = []
@@ -279,9 +309,14 @@ def coletar_agro(codigo: str) -> dict:
     try:
         # 105 efetivo dos rebanhos (cabeças), classificação 79 = tipo de rebanho
         for l in sidra(3939, [105], codigo, periodos="-1", classificacao="79[all]"):
-            if l["categoria"] and l["categoria"].lower() != "total" and l["valor"]:
-                ano_ppm = int(l["periodo"])
-                rebanhos.append({"tipo": l["categoria"], "cabecas": l["valor"]})
+            tipo = l["categoria"] or ""
+            # "Galináceos - galinhas" e "Suíno - matrizes" são subconjuntos do total do rebanho
+            if not tipo or tipo.lower() == "total" or not l["valor"]:
+                continue
+            if " - " in tipo and not tipo.lower().endswith(" - total"):
+                continue
+            ano_ppm = int(l["periodo"])
+            rebanhos.append({"tipo": tipo.replace(" - total", ""), "cabecas": l["valor"]})
     except RuntimeError as e:
         log(f"  PPM indisponível: {e}")
 
@@ -290,6 +325,69 @@ def coletar_agro(codigo: str) -> dict:
                      "fonte": "IBGE - Produção Agrícola Municipal (tabela 5457)"},
         "rebanhos": {"ano": ano_ppm, "itens": sorted(rebanhos, key=lambda x: -x["cabecas"]),
                      "fonte": "IBGE - Pesquisa da Pecuária Municipal (tabela 3939)"},
+    }
+
+
+def coletar_cempre(codigo: str) -> dict:
+    """
+    Emprego, salário e estabelecimentos pelo Cadastro Central de Empresas (CEMPRE/IBGE).
+    Não exige conta no Google Cloud. Não tem saldo mensal (isso só o CAGED fornece).
+    """
+    log("Emprego, salário e estabelecimentos (IBGE - CEMPRE)")
+    # 706 unidades locais, 708 pessoal ocupado assalariado, 10143 salário médio mensal (R$)
+    anos: dict[int, dict] = {}
+    for tabela in (1685, 9509):  # série até 2021 + série a partir de 2022
+        for l in sidra(tabela, [706, 708, 10143], codigo):
+            if l["valor"] is None:
+                continue
+            item = anos.setdefault(int(l["periodo"]), {})
+            item[l["variavel_id"]] = l["valor"]
+
+    # Por seção da CNAE no último ano: 706 unidades locais, 708 assalariados, 662 salários (mil R$)
+    meta = http_get_json(f"{API_AGREGADOS}/9528/metadados")
+    cnae = next(c for c in meta["classificacoes"] if c["id"] == 12762)
+    secoes = {c["id"]: c["nome"] for c in cnae["categorias"] if c.get("nivel") == 1}
+    ids = ",".join(str(i) for i in secoes)
+    setores: dict[str, dict] = {}
+    ano_setor = None
+    for l in sidra(9528, [706, 708, 662], codigo, periodos="-1", classificacao=f"12762[{ids}]"):
+        if l["valor"] is None or not l["categoria"]:
+            continue
+        ano_setor = int(l["periodo"])
+        letra = l["categoria"].split(" ", 1)[0]
+        s = setores.setdefault(letra, {"letra": letra, 706: 0.0, 708: 0.0, 662: 0.0})
+        s[l["variavel_id"]] += l["valor"]
+
+    emprego_setor: dict[str, dict] = {}
+    for s in setores.values():
+        g = emprego_setor.setdefault(grande_setor(s["letra"]), {"setor": grande_setor(s["letra"]), "empregos": 0, "massa": 0.0})
+        g["empregos"] += int(s[708])
+        g["massa"] += s[662] * 1000
+    itens_emprego = sorted(
+        # Mesma convenção do IBGE: salários do ano / (assalariados x 13 pagamentos)
+        ({"setor": g["setor"], "empregos": g["empregos"],
+          "remuneracao_media": round(g["massa"] / (g["empregos"] * 13), 2) if g["empregos"] else None}
+         for g in emprego_setor.values() if g["empregos"]), key=lambda x: -x["empregos"])
+    itens_estab = sorted(
+        ({"setor": nome_secao(s["letra"]), "quantidade": int(s[706])} for s in setores.values() if s[706]),
+        key=lambda x: -x["quantidade"])
+
+    fonte = "IBGE - Cadastro Central de Empresas (CEMPRE), tabelas 1685, 9509 e 9528"
+    return {
+        "rais": {
+            "sigla": "CEMPRE",
+            "serie": [{"ano": a, "empregos": int(v[708]), "remuneracao_media": v.get(10143)}
+                      for a, v in sorted(anos.items()) if 708 in v],
+            "por_setor": {"ano": ano_setor, "itens": itens_emprego},
+            "fonte": fonte + " · emprego = pessoal ocupado assalariado em 31/12",
+        },
+        "caged": {"serie": [], "fonte": "Novo CAGED não coletado (informe --billing-project)"},
+        "estabelecimentos": {
+            "sigla": "CEMPRE",
+            "serie": [{"ano": a, "total": int(v[706])} for a, v in sorted(anos.items()) if 706 in v],
+            "por_setor": {"ano": ano_setor, "itens": itens_estab},
+            "fonte": fonte + " · unidades locais",
+        },
     }
 
 
@@ -367,6 +465,7 @@ def coletar_trabalho(codigo: str, billing_project: str, anos: int) -> dict:
         "rais": {
             "serie": [{"ano": int(r["ano"]), "empregos": int(r["empregos"]),
                        "remuneracao_media": round(float(r["remuneracao_media"] or 0), 2)} for r in rais_anual],
+            "sigla": "RAIS",
             "por_setor": {"ano": ultimo_ano, "itens": emprego_setor},
             "fonte": "MTE - RAIS (vínculos ativos em 31/12), via Base dos Dados",
         },
@@ -376,6 +475,7 @@ def coletar_trabalho(codigo: str, billing_project: str, anos: int) -> dict:
             "fonte": "MTE - Novo CAGED, via Base dos Dados",
         },
         "estabelecimentos": {
+            "sigla": "RAIS",
             "serie": [{"ano": a, "total": estab_ano[a]} for a in sorted(estab_ano)],
             "por_setor": {"ano": ultimo_estab,
                           "itens": sorted(({"setor": k, "quantidade": v} for k, v in estab_setor.items()),
@@ -429,12 +529,14 @@ def main() -> None:
                     padrao={"lavouras": {"ano": None, "itens": [], "valor_total": 0, "fonte": "indisponível"},
                             "rebanhos": {"ano": None, "itens": [], "fonte": "indisponível"}})
 
+    trabalho = None
     if args.billing_project:
-        trabalho = executar("trabalho", status, coletar_trabalho, codigo, args.billing_project, args.anos,
-                            padrao=trabalho_vazio("indisponível"))
+        trabalho = executar("trabalho_rais_caged", status, coletar_trabalho, codigo, args.billing_project, args.anos)
     else:
-        log("Sem --billing-project: RAIS/CAGED não serão coletados.")
-        trabalho = trabalho_vazio("Não coletado (informe --billing-project)")
+        log("Sem --billing-project: usando CEMPRE/IBGE no lugar da RAIS; saldo do CAGED não será coletado.")
+    if trabalho is None:
+        trabalho = executar("trabalho_cempre", status, coletar_cempre, codigo,
+                            padrao=trabalho_vazio("indisponível"))
 
     saida = {
         "meta": {

@@ -72,6 +72,7 @@
 /* Base                                                                */
 /* ------------------------------------------------------------------ */
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html, body { margin: 0; }
 body {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;

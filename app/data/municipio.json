@@ -1,670 +1,639 @@
 {
   "meta": {
-    "gerado_em": "2026-10-07T00:00:00+00:00",
-    "amostra": true,
+    "gerado_em": "2026-10-13T18:03:59+00:00",
+    "amostra": false,
     "municipio": {
-      "codigo_ibge": "0000000",
-      "nome": "Município Exemplo",
+      "codigo_ibge": "4116604",
+      "nome": "Nova América da Colina",
       "uf": "PR",
       "uf_nome": "Paraná",
       "regiao": "Sul",
-      "microrregiao": "Exemplo",
-      "mesorregiao": "Exemplo"
+      "microrregiao": "Cornélio Procópio",
+      "mesorregiao": "Norte Pioneiro Paranaense"
     },
-    "etapas": []
+    "etapas": [
+      {
+        "etapa": "populacao",
+        "ok": true
+      },
+      {
+        "etapa": "pib",
+        "ok": true
+      },
+      {
+        "etapa": "agropecuaria",
+        "ok": true
+      },
+      {
+        "etapa": "trabalho_cempre",
+        "ok": true
+      }
+    ]
   },
   "populacao": {
     "serie": [
       {
-        "ano": 2012,
-        "valor": 78872.0,
+        "ano": 2001,
+        "valor": 3521.0,
         "fonte": "Estimativa IBGE",
         "variacao_pct": null
       },
       {
-        "ano": 2013,
-        "valor": 79440.0,
+        "ano": 2002,
+        "valor": 3476.0,
         "fonte": "Estimativa IBGE",
-        "variacao_pct": 0.72
+        "variacao_pct": -1.278
+      },
+      {
+        "ano": 2003,
+        "valor": 3425.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": -1.467
+      },
+      {
+        "ano": 2004,
+        "valor": 3318.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": -3.124
+      },
+      {
+        "ano": 2005,
+        "valor": 3259.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": -1.778
+      },
+      {
+        "ano": 2006,
+        "valor": 3201.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": -1.78
+      },
+      {
+        "ano": 2008,
+        "valor": 3358.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": 4.905
+      },
+      {
+        "ano": 2009,
+        "valor": 3331.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": -0.804
+      },
+      {
+        "ano": 2011,
+        "valor": 3470.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": 4.173
+      },
+      {
+        "ano": 2012,
+        "valor": 3462.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": -0.231
+      },
+      {
+        "ano": 2013,
+        "valor": 3560.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": 2.831
       },
       {
         "ano": 2014,
-        "valor": 80330.0,
+        "valor": 3556.0,
         "fonte": "Estimativa IBGE",
-        "variacao_pct": 1.12
+        "variacao_pct": -0.112
       },
       {
         "ano": 2015,
-        "valor": 80859.0,
+        "valor": 3553.0,
         "fonte": "Estimativa IBGE",
-        "variacao_pct": 0.659
+        "variacao_pct": -0.084
       },
       {
         "ano": 2016,
-        "valor": 81691.0,
+        "valor": 3549.0,
         "fonte": "Estimativa IBGE",
-        "variacao_pct": 1.029
+        "variacao_pct": -0.113
       },
       {
         "ano": 2017,
-        "valor": 82420.0,
+        "valor": 3545.0,
         "fonte": "Estimativa IBGE",
-        "variacao_pct": 0.892
+        "variacao_pct": -0.113
       },
       {
         "ano": 2018,
-        "valor": 82953.0,
+        "valor": 3456.0,
         "fonte": "Estimativa IBGE",
-        "variacao_pct": 0.647
+        "variacao_pct": -2.511
       },
       {
         "ano": 2019,
-        "valor": 83787.0,
+        "valor": 3445.0,
         "fonte": "Estimativa IBGE",
-        "variacao_pct": 1.005
+        "variacao_pct": -0.318
       },
       {
         "ano": 2020,
-        "valor": 84315.0,
+        "valor": 3434.0,
         "fonte": "Estimativa IBGE",
-        "variacao_pct": 0.63
+        "variacao_pct": -0.319
       },
       {
         "ano": 2021,
-        "valor": 85113.0,
+        "valor": 3424.0,
         "fonte": "Estimativa IBGE",
-        "variacao_pct": 0.946
+        "variacao_pct": -0.291
       },
       {
         "ano": 2022,
-        "valor": 85671.0,
+        "valor": 3280.0,
         "fonte": "Censo IBGE",
-        "variacao_pct": 0.656
+        "variacao_pct": -4.206
       },
       {
         "ano": 2024,
-        "valor": 86247.0,
+        "valor": 3299.0,
         "fonte": "Estimativa IBGE",
-        "variacao_pct": 0.672
+        "variacao_pct": 0.579
       },
       {
         "ano": 2025,
-        "valor": 87057.0,
+        "valor": 3286.0,
         "fonte": "Estimativa IBGE",
-        "variacao_pct": 0.939
+        "variacao_pct": -0.394
+      },
+      {
+        "ano": 2026,
+        "valor": 3274.0,
+        "fonte": "Estimativa IBGE",
+        "variacao_pct": -0.365
       }
     ],
-    "fonte": "DADOS FICTÍCIOS - substitua executando etl/coletar_dados.py"
+    "fonte": "IBGE - Estimativas de População (6579) e Censo 2022 (4709)"
   },
   "pib": {
     "serie": [
       {
+        "ano": 2002,
+        "pib": 19681000.0,
+        "vab_total": 18303000.0,
+        "vab_agropecuaria": 6926000.0,
+        "vab_industria": 2089000.0,
+        "vab_servicos": 5182000.0,
+        "vab_adm_publica": 4105000.0,
+        "impostos": 1378000.0,
+        "pib_per_capita": 5661.97
+      },
+      {
+        "ano": 2003,
+        "pib": 22985000.0,
+        "vab_total": 21297000.0,
+        "vab_agropecuaria": 8465000.0,
+        "vab_industria": 2419000.0,
+        "vab_servicos": 6038000.0,
+        "vab_adm_publica": 4375000.0,
+        "impostos": 1688000.0,
+        "pib_per_capita": 6710.95
+      },
+      {
+        "ano": 2004,
+        "pib": 28810000.0,
+        "vab_total": 26509000.0,
+        "vab_agropecuaria": 10313000.0,
+        "vab_industria": 4535000.0,
+        "vab_servicos": 6838000.0,
+        "vab_adm_publica": 4822000.0,
+        "impostos": 2301000.0,
+        "pib_per_capita": 8682.94
+      },
+      {
+        "ano": 2005,
+        "pib": 23546000.0,
+        "vab_total": 21477000.0,
+        "vab_agropecuaria": 7717000.0,
+        "vab_industria": 2528000.0,
+        "vab_servicos": 6090000.0,
+        "vab_adm_publica": 5143000.0,
+        "impostos": 2069000.0,
+        "pib_per_capita": 7224.92
+      },
+      {
+        "ano": 2006,
+        "pib": 26334000.0,
+        "vab_total": 24076000.0,
+        "vab_agropecuaria": 7430000.0,
+        "vab_industria": 4234000.0,
+        "vab_servicos": 6694000.0,
+        "vab_adm_publica": 5719000.0,
+        "impostos": 2258000.0,
+        "pib_per_capita": 8226.8
+      },
+      {
+        "ano": 2007,
+        "pib": 29977000.0,
+        "vab_total": 27166000.0,
+        "vab_agropecuaria": 9619000.0,
+        "vab_industria": 3717000.0,
+        "vab_servicos": 6415000.0,
+        "vab_adm_publica": 7416000.0,
+        "impostos": 2811000.0,
+        "pib_per_capita": 9140.72
+      },
+      {
+        "ano": 2008,
+        "pib": 38132000.0,
+        "vab_total": 36175000.0,
+        "vab_agropecuaria": 13217000.0,
+        "vab_industria": 6132000.0,
+        "vab_servicos": 8577000.0,
+        "vab_adm_publica": 8251000.0,
+        "impostos": 1956000.0,
+        "pib_per_capita": 11355.57
+      },
+      {
+        "ano": 2009,
+        "pib": 59883000.0,
+        "vab_total": 57552000.0,
+        "vab_agropecuaria": 9705000.0,
+        "vab_industria": 27926000.0,
+        "vab_servicos": 11174000.0,
+        "vab_adm_publica": 8747000.0,
+        "impostos": 2331000.0,
+        "pib_per_capita": 17977.48
+      },
+      {
+        "ano": 2010,
+        "pib": 42207000.0,
+        "vab_total": 40287000.0,
+        "vab_agropecuaria": 12287000.0,
+        "vab_industria": 8637000.0,
+        "vab_servicos": 9622000.0,
+        "vab_adm_publica": 9742000.0,
+        "impostos": 1920000.0,
+        "pib_per_capita": 12412.0
+      },
+      {
+        "ano": 2011,
+        "pib": 52792000.0,
+        "vab_total": 50352000.0,
+        "vab_agropecuaria": 16786000.0,
+        "vab_industria": 11655000.0,
+        "vab_servicos": 11528000.0,
+        "vab_adm_publica": 10383000.0,
+        "impostos": 2440000.0,
+        "pib_per_capita": 15213.83
+      },
+      {
         "ano": 2012,
-        "pib": 2301911157,
-        "vab_total": 2071720041,
-        "vab_agropecuaria": 368305785,
-        "vab_industria": 552458678,
-        "vab_servicos": 874726240,
-        "vab_adm_publica": 276229339,
-        "impostos": 230191116,
-        "pib_per_capita": 29185.4
+        "pib": 53575000.0,
+        "vab_total": 51100000.0,
+        "vab_agropecuaria": 16644000.0,
+        "vab_industria": 10566000.0,
+        "vab_servicos": 12241000.0,
+        "vab_adm_publica": 11649000.0,
+        "impostos": 2475000.0,
+        "pib_per_capita": 15475.16
       },
       {
         "ano": 2013,
-        "pib": 2393766981,
-        "vab_total": 2154390283,
-        "vab_agropecuaria": 383002717,
-        "vab_industria": 574504075,
-        "vab_servicos": 909631453,
-        "vab_adm_publica": 287252038,
-        "impostos": 239376698,
-        "pib_per_capita": 30133.02
+        "pib": 62175000.0,
+        "vab_total": 59817000.0,
+        "vab_agropecuaria": 22736000.0,
+        "vab_industria": 10041000.0,
+        "vab_servicos": 13463000.0,
+        "vab_adm_publica": 13577000.0,
+        "impostos": 2358000.0,
+        "pib_per_capita": 17464.89
       },
       {
         "ano": 2014,
-        "pib": 2508330555,
-        "vab_total": 2257497500,
-        "vab_agropecuaria": 401332889,
-        "vab_industria": 601999333,
-        "vab_servicos": 953165611,
-        "vab_adm_publica": 300999667,
-        "impostos": 250833056,
-        "pib_per_capita": 31225.33
+        "pib": 58959000.0,
+        "vab_total": 56576000.0,
+        "vab_agropecuaria": 18981000.0,
+        "vab_industria": 8778000.0,
+        "vab_servicos": 13476000.0,
+        "vab_adm_publica": 15342000.0,
+        "impostos": 2383000.0,
+        "pib_per_capita": 16580.15
       },
       {
         "ano": 2015,
-        "pib": 2709485266,
-        "vab_total": 2438536739,
-        "vab_agropecuaria": 433517643,
-        "vab_industria": 650276464,
-        "vab_servicos": 1029604401,
-        "vab_adm_publica": 325138232,
-        "impostos": 270948527,
-        "pib_per_capita": 33508.77
+        "pib": 75354000.0,
+        "vab_total": 71868000.0,
+        "vab_agropecuaria": 26714000.0,
+        "vab_industria": 9453000.0,
+        "vab_servicos": 19168000.0,
+        "vab_adm_publica": 16533000.0,
+        "impostos": 3486000.0,
+        "pib_per_capita": 21208.56
       },
       {
         "ano": 2016,
-        "pib": 2996194097,
-        "vab_total": 2696574687,
-        "vab_agropecuaria": 479391056,
-        "vab_industria": 719086583,
-        "vab_servicos": 1138553757,
-        "vab_adm_publica": 359543292,
-        "impostos": 299619410,
-        "pib_per_capita": 36677.16
+        "pib": 85318000.0,
+        "vab_total": 81883000.0,
+        "vab_agropecuaria": 35070000.0,
+        "vab_industria": 9323000.0,
+        "vab_servicos": 19261000.0,
+        "vab_adm_publica": 18229000.0,
+        "impostos": 3435000.0,
+        "pib_per_capita": 24040.01
       },
       {
         "ano": 2017,
-        "pib": 3224408916,
-        "vab_total": 2901968024,
-        "vab_agropecuaria": 515905427,
-        "vab_industria": 773858140,
-        "vab_servicos": 1225275388,
-        "vab_adm_publica": 386929070,
-        "impostos": 322440892,
-        "pib_per_capita": 39121.68
+        "pib": 84460000.0,
+        "vab_total": 80868000.0,
+        "vab_agropecuaria": 33536000.0,
+        "vab_industria": 8644000.0,
+        "vab_servicos": 19497000.0,
+        "vab_adm_publica": 19190000.0,
+        "impostos": 3592000.0,
+        "pib_per_capita": 23825.11
       },
       {
         "ano": 2018,
-        "pib": 3423465988,
-        "vab_total": 3081119389,
-        "vab_agropecuaria": 547754558,
-        "vab_industria": 821631837,
-        "vab_servicos": 1300917075,
-        "vab_adm_publica": 410815919,
-        "impostos": 342346599,
-        "pib_per_capita": 41269.95
+        "pib": 74068000.0,
+        "vab_total": 71146000.0,
+        "vab_agropecuaria": 30436000.0,
+        "vab_industria": 3272000.0,
+        "vab_servicos": 17830000.0,
+        "vab_adm_publica": 19608000.0,
+        "impostos": 2922000.0,
+        "pib_per_capita": 21431.71
       },
       {
         "ano": 2019,
-        "pib": 3793544060,
-        "vab_total": 3414189654,
-        "vab_agropecuaria": 606967050,
-        "vab_industria": 910450574,
-        "vab_servicos": 1441546743,
-        "vab_adm_publica": 455225287,
-        "impostos": 379354406,
-        "pib_per_capita": 45276.05
+        "pib": 75792000.0,
+        "vab_total": 72833000.0,
+        "vab_agropecuaria": 32503000.0,
+        "vab_industria": 3133000.0,
+        "vab_servicos": 17925000.0,
+        "vab_adm_publica": 19271000.0,
+        "impostos": 2960000.0,
+        "pib_per_capita": 22000.58
       },
       {
         "ano": 2020,
-        "pib": 3921487458,
-        "vab_total": 3529338712,
-        "vab_agropecuaria": 627437993,
-        "vab_industria": 941156990,
-        "vab_servicos": 1490165234,
-        "vab_adm_publica": 470578495,
-        "impostos": 392148746,
-        "pib_per_capita": 46509.96
+        "pib": 95593000.0,
+        "vab_total": 92626000.0,
+        "vab_agropecuaria": 49667000.0,
+        "vab_industria": 3625000.0,
+        "vab_servicos": 19780000.0,
+        "vab_adm_publica": 19554000.0,
+        "impostos": 2966000.0,
+        "pib_per_capita": 27837.22
       },
       {
         "ano": 2021,
-        "pib": 4308449945,
-        "vab_total": 3877604950,
-        "vab_agropecuaria": 689351991,
-        "vab_industria": 1034027987,
-        "vab_servicos": 1637210979,
-        "vab_adm_publica": 517013993,
-        "impostos": 430844994,
-        "pib_per_capita": 50620.35
+        "pib": 97600000.0,
+        "vab_total": 93644000.0,
+        "vab_agropecuaria": 49258000.0,
+        "vab_industria": 3891000.0,
+        "vab_servicos": 20506000.0,
+        "vab_adm_publica": 19990000.0,
+        "impostos": 3955000.0,
+        "pib_per_capita": 28504.67
+      },
+      {
+        "ano": 2022,
+        "pib": 102392000.0,
+        "vab_total": null,
+        "vab_agropecuaria": null,
+        "vab_industria": null,
+        "vab_servicos": null,
+        "vab_adm_publica": null,
+        "impostos": null,
+        "pib_per_capita": 31217.07
+      },
+      {
+        "ano": 2023,
+        "pib": 108097000.0,
+        "vab_total": null,
+        "vab_agropecuaria": null,
+        "vab_industria": null,
+        "vab_servicos": null,
+        "vab_adm_publica": null,
+        "impostos": null,
+        "pib_per_capita": 32861.23
       }
     ],
     "unidade": "R$ correntes",
-    "fonte": "DADOS FICTÍCIOS"
+    "fonte": "IBGE - PIB dos Municípios (tabela 5938)"
   },
   "rais": {
+    "sigla": "CEMPRE",
     "serie": [
       {
+        "ano": 2006,
+        "empregos": 794,
+        "remuneracao_media": 763.49
+      },
+      {
+        "ano": 2007,
+        "empregos": 1505,
+        "remuneracao_media": 701.27
+      },
+      {
+        "ano": 2008,
+        "empregos": 2635,
+        "remuneracao_media": 740.74
+      },
+      {
+        "ano": 2009,
+        "empregos": 2173,
+        "remuneracao_media": 857.11
+      },
+      {
+        "ano": 2010,
+        "empregos": 1608,
+        "remuneracao_media": 989.43
+      },
+      {
+        "ano": 2011,
+        "empregos": 1392,
+        "remuneracao_media": 1014.19
+      },
+      {
+        "ano": 2012,
+        "empregos": 1422,
+        "remuneracao_media": 1219.48
+      },
+      {
+        "ano": 2013,
+        "empregos": 1422,
+        "remuneracao_media": 1321.35
+      },
+      {
         "ano": 2014,
-        "empregos": 21353,
-        "remuneracao_media": 2178.15
+        "empregos": 1362,
+        "remuneracao_media": 1348.69
       },
       {
         "ano": 2015,
-        "empregos": 20914,
-        "remuneracao_media": 2277.09
+        "empregos": 1370,
+        "remuneracao_media": 1405.9
       },
       {
         "ano": 2016,
-        "empregos": 21652,
-        "remuneracao_media": 2365.98
+        "empregos": 1302,
+        "remuneracao_media": 1699.26
       },
       {
         "ano": 2017,
-        "empregos": 22010,
-        "remuneracao_media": 2512.54
+        "empregos": 1194,
+        "remuneracao_media": 1732.18
       },
       {
         "ano": 2018,
-        "empregos": 22005,
-        "remuneracao_media": 2656.73
+        "empregos": 364,
+        "remuneracao_media": 2801.24
       },
       {
         "ano": 2019,
-        "empregos": 21455,
-        "remuneracao_media": 2744.34
+        "empregos": 460,
+        "remuneracao_media": 2303.01
       },
       {
         "ano": 2020,
-        "empregos": 21165,
-        "remuneracao_media": 2920.04
+        "empregos": 470,
+        "remuneracao_media": 2232.88
       },
       {
         "ano": 2021,
-        "empregos": 21254,
-        "remuneracao_media": 3053.5
+        "empregos": 411,
+        "remuneracao_media": 2460.1
       },
       {
         "ano": 2022,
-        "empregos": 21612,
-        "remuneracao_media": 3214.3
+        "empregos": 437,
+        "remuneracao_media": 2987.46
       },
       {
         "ano": 2023,
-        "empregos": 21482,
-        "remuneracao_media": 3438.4
+        "empregos": 432,
+        "remuneracao_media": 3335.99
       },
       {
         "ano": 2024,
-        "empregos": 22039,
-        "remuneracao_media": 3583.51
+        "empregos": 390,
+        "remuneracao_media": 3675.47
       }
     ],
     "por_setor": {
       "ano": 2024,
       "itens": [
         {
+          "setor": "Administração pública",
+          "empregos": 178,
+          "remuneracao_media": 4550.56
+        },
+        {
+          "setor": "Agropecuária",
+          "empregos": 88,
+          "remuneracao_media": 4707.17
+        },
+        {
           "setor": "Serviços",
-          "empregos": 7493,
-          "remuneracao_media": 3150.0
+          "empregos": 59,
+          "remuneracao_media": 2911.34
         },
         {
           "setor": "Comércio",
-          "empregos": 5289,
-          "remuneracao_media": 2480.0
+          "empregos": 49,
+          "remuneracao_media": 2557.3
         },
         {
           "setor": "Indústria",
-          "empregos": 4628,
-          "remuneracao_media": 3420.0
-        },
-        {
-          "setor": "Administração pública",
-          "empregos": 2424,
-          "remuneracao_media": 4890.0
-        },
-        {
-          "setor": "Agropecuária",
-          "empregos": 1322,
-          "remuneracao_media": 2760.0
-        },
-        {
-          "setor": "Construção",
-          "empregos": 882,
-          "remuneracao_media": 2950.0
+          "empregos": 15,
+          "remuneracao_media": 4271.79
         }
       ]
     },
-    "fonte": "DADOS FICTÍCIOS"
+    "fonte": "IBGE - Cadastro Central de Empresas (CEMPRE), tabelas 1685, 9509 e 9528 · emprego = pessoal ocupado assalariado em 31/12"
   },
   "caged": {
-    "serie": [
-      {
-        "ano": 2023,
-        "mes": 1,
-        "admissoes": 1114,
-        "desligamentos": 1050,
-        "saldo": 64
-      },
-      {
-        "ano": 2023,
-        "mes": 2,
-        "admissoes": 1088,
-        "desligamentos": 1074,
-        "saldo": 14
-      },
-      {
-        "ano": 2023,
-        "mes": 3,
-        "admissoes": 995,
-        "desligamentos": 1041,
-        "saldo": -46
-      },
-      {
-        "ano": 2023,
-        "mes": 4,
-        "admissoes": 1049,
-        "desligamentos": 982,
-        "saldo": 67
-      },
-      {
-        "ano": 2023,
-        "mes": 5,
-        "admissoes": 1131,
-        "desligamentos": 1241,
-        "saldo": -110
-      },
-      {
-        "ano": 2023,
-        "mes": 6,
-        "admissoes": 857,
-        "desligamentos": 747,
-        "saldo": 110
-      },
-      {
-        "ano": 2023,
-        "mes": 7,
-        "admissoes": 1082,
-        "desligamentos": 1049,
-        "saldo": 33
-      },
-      {
-        "ano": 2023,
-        "mes": 8,
-        "admissoes": 904,
-        "desligamentos": 957,
-        "saldo": -53
-      },
-      {
-        "ano": 2023,
-        "mes": 9,
-        "admissoes": 995,
-        "desligamentos": 893,
-        "saldo": 102
-      },
-      {
-        "ano": 2023,
-        "mes": 10,
-        "admissoes": 1070,
-        "desligamentos": 1037,
-        "saldo": 33
-      },
-      {
-        "ano": 2023,
-        "mes": 11,
-        "admissoes": 840,
-        "desligamentos": 946,
-        "saldo": -106
-      },
-      {
-        "ano": 2023,
-        "mes": 12,
-        "admissoes": 859,
-        "desligamentos": 974,
-        "saldo": -115
-      },
-      {
-        "ano": 2024,
-        "mes": 1,
-        "admissoes": 1105,
-        "desligamentos": 1111,
-        "saldo": -6
-      },
-      {
-        "ano": 2024,
-        "mes": 2,
-        "admissoes": 980,
-        "desligamentos": 927,
-        "saldo": 53
-      },
-      {
-        "ano": 2024,
-        "mes": 3,
-        "admissoes": 999,
-        "desligamentos": 1011,
-        "saldo": -12
-      },
-      {
-        "ano": 2024,
-        "mes": 4,
-        "admissoes": 1074,
-        "desligamentos": 1082,
-        "saldo": -8
-      },
-      {
-        "ano": 2024,
-        "mes": 5,
-        "admissoes": 1053,
-        "desligamentos": 930,
-        "saldo": 123
-      },
-      {
-        "ano": 2024,
-        "mes": 6,
-        "admissoes": 867,
-        "desligamentos": 968,
-        "saldo": -101
-      },
-      {
-        "ano": 2024,
-        "mes": 7,
-        "admissoes": 958,
-        "desligamentos": 939,
-        "saldo": 19
-      },
-      {
-        "ano": 2024,
-        "mes": 8,
-        "admissoes": 853,
-        "desligamentos": 728,
-        "saldo": 125
-      },
-      {
-        "ano": 2024,
-        "mes": 9,
-        "admissoes": 978,
-        "desligamentos": 1003,
-        "saldo": -25
-      },
-      {
-        "ano": 2024,
-        "mes": 10,
-        "admissoes": 1115,
-        "desligamentos": 1149,
-        "saldo": -34
-      },
-      {
-        "ano": 2024,
-        "mes": 11,
-        "admissoes": 1048,
-        "desligamentos": 980,
-        "saldo": 68
-      },
-      {
-        "ano": 2024,
-        "mes": 12,
-        "admissoes": 1017,
-        "desligamentos": 1164,
-        "saldo": -147
-      },
-      {
-        "ano": 2025,
-        "mes": 1,
-        "admissoes": 997,
-        "desligamentos": 862,
-        "saldo": 135
-      },
-      {
-        "ano": 2025,
-        "mes": 2,
-        "admissoes": 1056,
-        "desligamentos": 1006,
-        "saldo": 50
-      },
-      {
-        "ano": 2025,
-        "mes": 3,
-        "admissoes": 906,
-        "desligamentos": 922,
-        "saldo": -16
-      },
-      {
-        "ano": 2025,
-        "mes": 4,
-        "admissoes": 879,
-        "desligamentos": 865,
-        "saldo": 14
-      },
-      {
-        "ano": 2025,
-        "mes": 5,
-        "admissoes": 850,
-        "desligamentos": 765,
-        "saldo": 85
-      },
-      {
-        "ano": 2025,
-        "mes": 6,
-        "admissoes": 967,
-        "desligamentos": 860,
-        "saldo": 107
-      },
-      {
-        "ano": 2025,
-        "mes": 7,
-        "admissoes": 946,
-        "desligamentos": 907,
-        "saldo": 39
-      },
-      {
-        "ano": 2025,
-        "mes": 8,
-        "admissoes": 1020,
-        "desligamentos": 1114,
-        "saldo": -94
-      },
-      {
-        "ano": 2025,
-        "mes": 9,
-        "admissoes": 1074,
-        "desligamentos": 954,
-        "saldo": 120
-      },
-      {
-        "ano": 2025,
-        "mes": 10,
-        "admissoes": 905,
-        "desligamentos": 879,
-        "saldo": 26
-      },
-      {
-        "ano": 2025,
-        "mes": 11,
-        "admissoes": 1025,
-        "desligamentos": 1025,
-        "saldo": 0
-      },
-      {
-        "ano": 2025,
-        "mes": 12,
-        "admissoes": 962,
-        "desligamentos": 1108,
-        "saldo": -146
-      },
-      {
-        "ano": 2026,
-        "mes": 1,
-        "admissoes": 890,
-        "desligamentos": 959,
-        "saldo": -69
-      },
-      {
-        "ano": 2026,
-        "mes": 2,
-        "admissoes": 1040,
-        "desligamentos": 1121,
-        "saldo": -81
-      },
-      {
-        "ano": 2026,
-        "mes": 3,
-        "admissoes": 1101,
-        "desligamentos": 1032,
-        "saldo": 69
-      },
-      {
-        "ano": 2026,
-        "mes": 4,
-        "admissoes": 1032,
-        "desligamentos": 983,
-        "saldo": 49
-      },
-      {
-        "ano": 2026,
-        "mes": 5,
-        "admissoes": 1014,
-        "desligamentos": 1119,
-        "saldo": -105
-      },
-      {
-        "ano": 2026,
-        "mes": 6,
-        "admissoes": 938,
-        "desligamentos": 836,
-        "saldo": 102
-      },
-      {
-        "ano": 2026,
-        "mes": 7,
-        "admissoes": 862,
-        "desligamentos": 767,
-        "saldo": 95
-      },
-      {
-        "ano": 2026,
-        "mes": 8,
-        "admissoes": 897,
-        "desligamentos": 816,
-        "saldo": 81
-      }
-    ],
-    "fonte": "DADOS FICTÍCIOS"
+    "serie": [],
+    "fonte": "Novo CAGED não coletado (informe --billing-project)"
   },
   "estabelecimentos": {
+    "sigla": "CEMPRE",
     "serie": [
       {
+        "ano": 2006,
+        "total": 61
+      },
+      {
+        "ano": 2007,
+        "total": 97
+      },
+      {
+        "ano": 2008,
+        "total": 61
+      },
+      {
+        "ano": 2009,
+        "total": 111
+      },
+      {
+        "ano": 2010,
+        "total": 124
+      },
+      {
+        "ano": 2011,
+        "total": 67
+      },
+      {
+        "ano": 2012,
+        "total": 50
+      },
+      {
+        "ano": 2013,
+        "total": 71
+      },
+      {
         "ano": 2014,
-        "total": 3389
+        "total": 84
       },
       {
         "ano": 2015,
-        "total": 3456
+        "total": 86
       },
       {
         "ano": 2016,
-        "total": 3612
+        "total": 79
       },
       {
         "ano": 2017,
-        "total": 3720
+        "total": 83
       },
       {
         "ano": 2018,
-        "total": 3763
+        "total": 71
       },
       {
         "ano": 2019,
-        "total": 3868
+        "total": 53
       },
       {
         "ano": 2020,
-        "total": 3966
+        "total": 55
       },
       {
         "ano": 2021,
-        "total": 4025
+        "total": 70
       },
       {
         "ano": 2022,
-        "total": 4138
+        "total": 128
       },
       {
         "ano": 2023,
-        "total": 4268
+        "total": 137
       },
       {
         "ano": 2024,
-        "total": 4378
+        "total": 148
       }
     ],
     "por_setor": {
@@ -672,138 +641,243 @@
       "itens": [
         {
           "setor": "Comércio",
-          "quantidade": 1180
+          "quantidade": 50
         },
         {
           "setor": "Outros serviços",
-          "quantidade": 410
+          "quantidade": 27
         },
         {
-          "setor": "Alojamento e alimentação",
-          "quantidade": 365
-        },
-        {
-          "setor": "Indústria de transformação",
-          "quantidade": 340
-        },
-        {
-          "setor": "Atividades profissionais e técnicas",
-          "quantidade": 295
+          "setor": "Administração pública",
+          "quantidade": 10
         },
         {
           "setor": "Saúde e serviços sociais",
-          "quantidade": 240
+          "quantidade": 10
         },
         {
-          "setor": "Transporte e armazenagem",
-          "quantidade": 225
+          "setor": "Indústria de transformação",
+          "quantidade": 9
         },
         {
-          "setor": "Construção",
-          "quantidade": 210
-        },
-        {
-          "setor": "Agropecuária",
-          "quantidade": 185
+          "setor": "Atividades profissionais e técnicas",
+          "quantidade": 8
         },
         {
           "setor": "Atividades administrativas",
-          "quantidade": 160
+          "quantidade": 7
         },
         {
-          "setor": "Educação",
-          "quantidade": 120
+          "setor": "Agropecuária",
+          "quantidade": 5
+        },
+        {
+          "setor": "Transporte e armazenagem",
+          "quantidade": 5
+        },
+        {
+          "setor": "Construção",
+          "quantidade": 4
+        },
+        {
+          "setor": "Financeiro e seguros",
+          "quantidade": 4
         },
         {
           "setor": "Informação e comunicação",
-          "quantidade": 85
+          "quantidade": 2
+        },
+        {
+          "setor": "Atividades imobiliárias",
+          "quantidade": 2
+        },
+        {
+          "setor": "Artes, cultura e esporte",
+          "quantidade": 2
+        },
+        {
+          "setor": "Indústrias extrativas",
+          "quantidade": 1
+        },
+        {
+          "setor": "Alojamento e alimentação",
+          "quantidade": 1
+        },
+        {
+          "setor": "Educação",
+          "quantidade": 1
         }
       ]
     },
-    "fonte": "DADOS FICTÍCIOS"
+    "fonte": "IBGE - Cadastro Central de Empresas (CEMPRE), tabelas 1685, 9509 e 9528 · unidades locais"
   },
   "agropecuaria": {
     "lavouras": {
-      "ano": 2024,
+      "ano": 2025,
       "itens": [
         {
           "produto": "Soja (em grão)",
-          "valor": 186000000.0,
-          "quantidade": 61200,
+          "quantidade": 17366.0,
           "unidade": "Toneladas",
-          "area_colhida_ha": 28400
+          "valor": 34274000.0,
+          "area_colhida_ha": 5602.0
         },
         {
           "produto": "Milho (em grão)",
-          "valor": 74000000.0,
-          "quantidade": 98500,
+          "quantidade": 20656.0,
           "unidade": "Toneladas",
-          "area_colhida_ha": 9800
+          "valor": 17102000.0,
+          "area_colhida_ha": 4105.0
         },
         {
-          "produto": "Trigo (em grão)",
-          "valor": 21000000.0,
-          "quantidade": 15200,
+          "produto": "Cana-de-açúcar",
+          "quantidade": 65846.0,
           "unidade": "Toneladas",
-          "area_colhida_ha": 5100
-        },
-        {
-          "produto": "Feijão (em grão)",
-          "valor": 9400000.0,
-          "quantidade": 3100,
-          "unidade": "Toneladas",
-          "area_colhida_ha": 1900
-        },
-        {
-          "produto": "Mandioca",
-          "valor": 3200000.0,
-          "quantidade": 4100,
-          "unidade": "Toneladas",
-          "area_colhida_ha": 210
-        },
-        {
-          "produto": "Erva-mate (folha verde)",
-          "valor": 2600000.0,
-          "quantidade": 2300,
-          "unidade": "Toneladas",
-          "area_colhida_ha": 380
+          "valor": 9556000.0,
+          "area_colhida_ha": 803.0
         },
         {
           "produto": "Laranja",
-          "valor": 1100000.0,
-          "quantidade": 1500,
+          "quantidade": 2750.0,
           "unidade": "Toneladas",
-          "area_colhida_ha": 60
+          "valor": 5027000.0,
+          "area_colhida_ha": 110.0
+        },
+        {
+          "produto": "Trigo (em grão)",
+          "quantidade": 4387.0,
+          "unidade": "Toneladas",
+          "valor": 4749000.0,
+          "area_colhida_ha": 1330.0
+        },
+        {
+          "produto": "Uva",
+          "quantidade": 350.0,
+          "unidade": "Toneladas",
+          "valor": 2944000.0,
+          "area_colhida_ha": 10.0
+        },
+        {
+          "produto": "Tomate",
+          "quantidade": 424.0,
+          "unidade": "Toneladas",
+          "valor": 1993000.0,
+          "area_colhida_ha": 9.0
+        },
+        {
+          "produto": "Café (em grão)",
+          "quantidade": 58.0,
+          "unidade": "Toneladas",
+          "valor": 1759000.0,
+          "area_colhida_ha": 32.0
+        },
+        {
+          "produto": "Maracujá",
+          "quantidade": 50.0,
+          "unidade": "Toneladas",
+          "valor": 356000.0,
+          "area_colhida_ha": 5.0
+        },
+        {
+          "produto": "Abacate",
+          "quantidade": 75.0,
+          "unidade": "Toneladas",
+          "valor": 324000.0,
+          "area_colhida_ha": 6.0
+        },
+        {
+          "produto": "Abacaxi",
+          "quantidade": 32.0,
+          "unidade": "Mil frutos",
+          "valor": 132000.0,
+          "area_colhida_ha": 2.0
+        },
+        {
+          "produto": "Batata-inglesa",
+          "quantidade": 69.0,
+          "unidade": "Toneladas",
+          "valor": 118000.0,
+          "area_colhida_ha": 3.0
+        },
+        {
+          "produto": "Abóbora",
+          "quantidade": 55.0,
+          "unidade": "Toneladas",
+          "valor": 111000.0,
+          "area_colhida_ha": 4.0
+        },
+        {
+          "produto": "Alface",
+          "quantidade": 35.0,
+          "unidade": "Toneladas",
+          "valor": 111000.0,
+          "area_colhida_ha": 2.0
+        },
+        {
+          "produto": "Pimentão",
+          "quantidade": 25.0,
+          "unidade": "Toneladas",
+          "valor": 77000.0,
+          "area_colhida_ha": 1.0
+        },
+        {
+          "produto": "Milho verde",
+          "quantidade": 13.0,
+          "unidade": "Toneladas",
+          "valor": 57000.0,
+          "area_colhida_ha": 1.0
+        },
+        {
+          "produto": "Mandioca",
+          "quantidade": 47.0,
+          "unidade": "Toneladas",
+          "valor": 27000.0,
+          "area_colhida_ha": 5.0
+        },
+        {
+          "produto": "Aveia (em grão)",
+          "quantidade": 12.0,
+          "unidade": "Toneladas",
+          "valor": 12000.0,
+          "area_colhida_ha": 5.0
         }
       ],
-      "valor_total": 297300000.0,
-      "fonte": "DADOS FICTÍCIOS"
+      "valor_total": 78729000.0,
+      "fonte": "IBGE - Produção Agrícola Municipal (tabela 5457)"
     },
     "rebanhos": {
-      "ano": 2024,
+      "ano": 2025,
       "itens": [
         {
-          "tipo": "Galináceos - total",
-          "cabecas": 412000.0
+          "tipo": "Galináceos",
+          "cabecas": 45572.0
         },
         {
           "tipo": "Bovino",
-          "cabecas": 38500.0
-        },
-        {
-          "tipo": "Suíno - total",
-          "cabecas": 21400.0
-        },
-        {
-          "tipo": "Ovino",
-          "cabecas": 4200.0
+          "cabecas": 5102.0
         },
         {
           "tipo": "Equino",
-          "cabecas": 1300.0
+          "cabecas": 223.0
+        },
+        {
+          "tipo": "Suíno",
+          "cabecas": 69.0
+        },
+        {
+          "tipo": "Ovino",
+          "cabecas": 47.0
+        },
+        {
+          "tipo": "Caprino",
+          "cabecas": 20.0
+        },
+        {
+          "tipo": "Bubalino",
+          "cabecas": 1.0
         }
       ],
-      "fonte": "DADOS FICTÍCIOS"
+      "fonte": "IBGE - Pesquisa da Pecuária Municipal (tabela 3939)"
     }
   }
 }
